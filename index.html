@@ -32,8 +32,16 @@
             display: flex;
             justify-content: center;
             min-height: 100vh;
+            /* Nova regra: Transição para evitar "salto" visual ao fechar/abrir o modal */
+            transition: overflow 0.3s ease;
         }
 
+        /* FIX ESSENCIAL: Impede que a tela de fundo role quando o modal estiver ativo */
+        body.modal-open {
+            overflow: hidden; 
+        }
+
+        /* --- Estrutura Principal --- */
         .container {
             max-width: 600px;
             width: 100%;
@@ -42,101 +50,98 @@
             overflow: hidden;
         }
 
-        /* --- Cabeçalho --- */
-        .header {
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            border-bottom: 1px solid var(--divider-color);
-        }
-
-        .header img {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            object-fit: cover;
-            box-shadow: 0 0 10px rgba(0, 207, 255, 0.4);
-        }
-
+        /* --- Cabeçalho e Lista de Comandos (Estilos mantidos) --- */
+        .header { padding: 20px; display: flex; align-items: center; gap: 15px; border-bottom: 1px solid var(--divider-color); }
+        .header img { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 10px rgba(0, 207, 255, 0.4); }
         .header-info h1 { font-size: 1.2rem; font-weight: 700; margin: 0; }
         .header-info p { font-size: 0.85rem; color: var(--subtle-text); margin: 0; }
 
-        /* --- Seção de Boas-Vindas e Pesquisa --- */
         .welcome-section { padding: 20px; }
         .welcome-section h2 { font-size: 1.4rem; font-weight: 500; margin-bottom: 10px; }
         .welcome-section p { font-size: 0.95rem; color: var(--subtle-text); margin-bottom: 20px; }
-
-        .search-bar {
-            width: 100%; padding: 12px 15px; border: none; border-radius: 8px;
-            background-color: var(--card-bg); color: var(--text-color);
-            font-size: 1rem; outline: none;
-        }
-
-        /* --- Lista de Comandos --- */
-        .command-list-header {
-            padding: 10px 20px; display: flex; justify-content: space-between;
-            align-items: center; font-size: 0.9rem; color: var(--subtle-text);
-            border-top: 1px solid var(--divider-color); margin-top: 20px;
-        }
-
+        .search-bar { width: 100%; padding: 12px 15px; border: none; border-radius: 8px; background-color: var(--card-bg); color: var(--text-color); font-size: 1rem; outline: none; }
+        .command-list-header { padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem; color: var(--subtle-text); border-top: 1px solid var(--divider-color); margin-top: 20px; }
+        
         .command-card {
             background-color: var(--card-bg); border-radius: 8px;
             margin: 0 20px 10px 20px; padding: 15px; display: flex;
             flex-direction: column; gap: 5px; cursor: pointer;
             transition: background-color 0.2s ease;
         }
-
         .command-card:hover { background-color: #282828; }
         .command-card-title { font-size: 1.05rem; font-weight: 500; color: var(--text-color); }
         .command-card-description { font-size: 0.9rem; color: var(--subtle-text); }
         
-        /* --- Detalhes do Comando (Inicialmente oculto) --- */
+        /* --- Detalhes do Comando (Modal Flutuante) --- */
         .details-section {
-            background-color: var(--card-bg); border-radius: 8px;
-            padding: 20px; margin: 20px; display: none; /* Oculta por padrão */
+            position: fixed; /* O modal FLUTUA */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95); /* Fundo escuro */
+            padding: 40px 10px;
+            display: none; /* Oculta por padrão */
+            z-index: 1000;
+            overflow-y: auto;
+            align-items: center;
+            justify-content: center;
+            /* Adiciona o efeito de transição para suavizar a entrada e saída */
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
         }
 
         .details-section.active {
-            display: block; /* Exibe quando ativo */
+            display: flex; /* Exibe como um modal centralizado */
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        /* O CARD do pop-up */
+        .details-content {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            max-width: 400px; /* Largura do pop-up */
+            width: 95%;
+            box-shadow: 0 5px 20px rgba(0, 207, 255, 0.2);
+            position: relative; /* Para posicionar o botão de fechar */
+        }
+        
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: var(--subtle-text);
+            font-size: 1.8rem;
+            cursor: pointer;
+            line-height: 1;
+            padding: 5px;
+            transition: color 0.2s ease;
+        }
+        .close-button:hover {
+            color: var(--text-color);
         }
 
-        .details-section h3 { font-size: 1.1rem; font-weight: 700; color: var(--accent-color); margin-bottom: 15px; }
-
-        .details-box {
-            background-color: #121212; padding: 15px; border-radius: 6px;
-            margin-bottom: 20px; border: 1px solid var(--divider-color);
-        }
-
+        /* Conteúdo interno do card de detalhes */
+        .details-content h3 { font-size: 1.1rem; font-weight: 700; color: var(--accent-color); margin-bottom: 15px; }
+        .details-box { background-color: #121212; padding: 15px; border-radius: 6px; margin-bottom: 20px; border: 1px solid var(--divider-color); }
         .details-box p { font-size: 0.9rem; color: var(--subtle-text); margin-bottom: 10px; }
-        
-        /* Estilo do comando de exemplo */
-        .details-box code {
-            display: block; background-color: #000000; color: var(--accent-color);
-            padding: 10px; border-radius: 5px; font-family: monospace; overflow-x: auto;
-        }
-
+        .details-box code { display: block; background-color: #000000; color: var(--accent-color); padding: 10px; border-radius: 5px; font-family: monospace; overflow-x: auto; }
         .how-to-use p { font-size: 0.95rem; color: var(--subtle-text); margin-bottom: 20px; }
-        
-        .main-button {
-            display: block; width: 100%; padding: 15px; border: none;
-            border-radius: 10px; background-color: var(--accent-color);
-            color: var(--button-text-color); text-align: center;
-            text-decoration: none; font-size: 1rem; font-weight: 700;
-            cursor: pointer; transition: background-color 0.2s, box-shadow 0.2s;
-            box-shadow: 0 4px 15px rgba(0, 207, 255, 0.4);
-        }
-
+        .main-button { display: block; width: 100%; padding: 15px; border: none; border-radius: 10px; background-color: var(--accent-color); color: var(--button-text-color); text-align: center; text-decoration: none; font-size: 1rem; font-weight: 700; cursor: pointer; box-shadow: 0 4px 15px rgba(0, 207, 255, 0.4); }
         .main-button:hover { background-color: #40dfff; box-shadow: 0 6px 20px rgba(0, 207, 255, 0.6); }
 
         /* --- Rodapé --- */
         .footer { padding: 15px; text-align: center; font-size: 0.8rem; color: #555555; border-top: 1px solid var(--divider-color); margin-top: 20px; }
-
+        
         /* --- Responsividade --- */
         @media (max-width: 450px) {
             body { padding: 10px 5px; }
             .container { border-radius: 0; }
-            /* ... (outros estilos de responsividade) */
         }
     </style>
 </head>
@@ -163,7 +168,7 @@
             <span>11 comandos</span>
         </div>
 
-        <div class="command-card" data-cmd="/cpf" data-ex="12345678900">
+        <div class="command-card" data-cmd="/cpf" data-ex="82274320004">
             <span class="command-card-title">CPF</span>
             <span class="command-card-description">Consulta pessoas físicas a partir do número do CPF, retornando dados cadastrais, documentos principais e situação cadastral.</span>
         </div>
@@ -217,21 +222,6 @@
             <span class="command-card-title">RESGATAR</span>
             <span class="command-card-description">Ative ou estenda sua assinatura utilizando uma chave de ativação.</span>
         </div>
-
-        <div class="details-section" id="command-details">
-            <h3>Detalhes do comando <span id="detail-title">CPF</span></h3>
-            
-            <div class="details-box">
-                <p id="detail-description">Consulta pessoas físicas a partir do número do CPF, retornando dados cadastrais, documentos principais e situação cadastral.</p>
-                <code id="detail-example">/cpf 12345678900</code>
-            </div>
-
-            <div class="how-to-use">
-                <p>Copie o comando acima e cole-o diretamente no chat do Telegram com o bot. O bot processará sua solicitação e retornará os resultados da consulta.</p>
-                <a href="https://t.me/rockconsultasgratisbot" class="main-button" target="_blank">Abrir bot no Telegram</a>
-            </div>
-            
-        </div>
         
         <footer class="footer">
             <p>@rockconsultasgratisbot. Todos os direitos reservados.</p>
@@ -239,15 +229,36 @@
 
     </div>
 
+    <div class="details-section" id="command-details">
+        <div class="details-content">
+            <button id="close-details" class="close-button" aria-label="Fechar">&times;</button>
+            
+            <h3>Detalhes do comando <span id="detail-title">CPF</span></h3>
+            
+            <div class="details-box">
+                <p id="detail-description">Consulta pessoas físicas a partir do número do CPF, retornando dados cadastrais, documentos principais e situação cadastral.</p>
+                <code id="detail-example">/cpf 82274320004</code>
+            </div>
+
+            <div class="how-to-use">
+                <p>Copie o comando acima e cole-o diretamente no chat do Telegram com o bot. O bot processará sua solicitação e retornará os resultados da consulta.</p>
+                <a href="https://t.me/rockconsultasgratisbot" class="main-button" target="_blank">Abrir bot no Telegram</a>
+            </div>
+        </div>
+    </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const commandCards = document.querySelectorAll('.command-card');
             const detailsSection = document.getElementById('command-details');
+            const closeButton = document.getElementById('close-details');
+            
+            // Elementos dinâmicos dentro do modal
             const detailTitle = document.getElementById('detail-title');
             const detailDescription = document.getElementById('detail-description');
             const detailExample = document.getElementById('detail-example');
 
-            // Função para atualizar e exibir os detalhes
+            // 1. Função para abrir o modal
             const updateDetails = (card) => {
                 const titleText = card.querySelector('.command-card-title').textContent;
                 const descriptionText = card.querySelector('.command-card-description').textContent;
@@ -258,24 +269,50 @@
                 detailDescription.textContent = descriptionText;
                 detailExample.textContent = `${command} ${example}`;
 
-                // Ativa a exibição da seção de detalhes (simulando o pop-up)
+                // Adiciona a classe 'active' para exibir o modal flutuante
                 detailsSection.classList.add('active');
+                // Bloqueia o scroll do corpo
+                document.body.classList.add('modal-open'); 
                 
-                // Rola para a seção de detalhes para que ela seja visível imediatamente no mobile
-                detailsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                // REMOVEMOS A FUNÇÃO scrollIntoView. Agora ele apenas flutua
             };
 
-            // Adiciona o listener para cada cartão
+            // 2. Função para fechar o modal
+            const closeDetails = () => {
+                detailsSection.classList.remove('active');
+                // Libera o scroll do corpo
+                document.body.classList.remove('modal-open');
+            };
+
+            // Adiciona o listener para cada cartão (ABRIR)
             commandCards.forEach(card => {
                 card.addEventListener('click', () => {
+                    // Preenche e exibe o modal
                     updateDetails(card);
                 });
+            });
+
+            // Adiciona o listener para o botão de fechar e clique fora do card
+            closeButton.addEventListener('click', closeDetails);
+
+            detailsSection.addEventListener('click', (e) => {
+                // Se o clique foi exatamente no fundo (details-section), feche.
+                if (e.target.id === 'command-details') {
+                    closeDetails();
+                }
             });
 
             // Inicializa a seção de detalhes com o primeiro comando (CPF)
             const firstCard = commandCards[0];
             if (firstCard) {
-                updateDetails(firstCard);
+                // Apenas carrega os dados do primeiro comando no modal, mas não o exibe.
+                const titleText = firstCard.querySelector('.command-card-title').textContent;
+                const descriptionText = firstCard.querySelector('.command-card-description').textContent;
+                const command = firstCard.dataset.cmd;
+                const example = firstCard.dataset.ex;
+                detailTitle.textContent = titleText;
+                detailDescription.textContent = descriptionText;
+                detailExample.textContent = `${command} ${example}`;
             }
         });
     </script>
