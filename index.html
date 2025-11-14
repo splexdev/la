@@ -1,281 +1,257 @@
-<!DOCTYPE html>
+-<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Comandos - Rock Consultas Bot</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        /* --- Reset Básico e Configurações Globais --- */
+        /* --- Reset Básico e Cores --- */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        html {
-            scroll-behavior: smooth;
+        :root {
+            /* Cores Dark Mode, Limpas e Modernas */
+            --bg-color: #0A0A0A; /* Fundo principal */
+            --card-bg: #1F1F1F; /* Fundo dos cards (como na imagem do Telegram) */
+            --text-color: #FFFFFF; /* Texto principal */
+            --subtle-text: #B0B0B0; /* Texto secundário/descrição */
+            --accent-color: #00CFFF; /* Cor principal de destaque (Neon Blue) */
+            --button-text-color: #0A0A0A; /* Cor do texto no botão (preto no azul) */
+            --divider-color: #333333;
         }
 
         body {
             font-family: 'Roboto', sans-serif;
-            background-color: #000000; /* Preto puro, como no fundo da logo */
-            color: #FFFFFF; /* Texto branco puro */
-            line-height: 1.6;
-            padding: 20px;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.5;
+            padding: 20px 10px;
             display: flex;
             justify-content: center;
-            min-height: 100vh; /* Garante que o fundo preto cubra toda a altura */
-        }
-
-        /* --- Cores e Variáveis (para fácil ajuste) --- */
-        :root {
-            --primary-blue: #00CFFF; /* Azul neon da logo */
-            --dark-background: #0A0A0A; /* Fundo para seções/cards */
-            --light-text: #E0E0E0;
-            --white-text: #FFFFFF;
-            --code-bg: #1A1A1A;
+            min-height: 100vh;
         }
 
         /* --- Estrutura Principal --- */
         .container {
-            max-width: 900px;
+            max-width: 600px; /* Largura ideal para um pop-up/mobile */
             width: 100%;
-            background-color: var(--dark-background);
+            background-color: var(--bg-color);
             border-radius: 12px;
-            box-shadow: 0 0 40px rgba(0, 207, 255, 0.15); /* Sombra azul neon sutil */
             overflow: hidden;
-            display: flex;
-            flex-direction: column;
         }
 
-        /* --- Cabeçalho --- */
+        /* --- Cabeçalho (Topo do Pop-up) --- */
         .header {
-            text-align: center;
-            padding: 40px 20px;
-            background-color: #050505; /* Um preto um pouco menos intenso que o fundo */
-            border-bottom: 1px solid #1A1A1A;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 1px solid var(--divider-color);
         }
 
         .header img {
-            max-width: 180px; /* Logo um pouco maior */
-            height: auto;
-            margin-bottom: 25px;
-            border-radius: 20px; /* Bordas arredondadas da logo */
-            box-shadow: 0 0 25px rgba(0, 207, 255, 0.4); /* Sombra neon da logo */
+            width: 48px; /* Tamanho do ícone/logo no topo */
+            height: 48px;
+            border-radius: 50%; /* Fazendo a logo ser redonda como no Telegram */
+            object-fit: cover;
+            box-shadow: 0 0 10px rgba(0, 207, 255, 0.4); /* Efeito neon sutil */
         }
 
-        .header h1 {
-            color: var(--white-text);
-            font-size: 3rem; /* Título maior */
-            font-weight: 700;
-            margin-bottom: 15px;
-            text-shadow: 0 0 10px rgba(0, 207, 255, 0.7); /* Efeito neon no título */
+        .header-info {
+            line-height: 1.2;
         }
 
-        .header p {
+        .header-info h1 {
             font-size: 1.2rem;
-            color: var(--light-text);
-            max-width: 600px;
-            margin: 0 auto;
-            font-weight: 300;
-        }
-
-        /* --- Conteúdo Principal (Comandos) --- */
-        main {
-            padding: 40px;
-            flex-grow: 1; /* Permite que o main ocupe espaço disponível */
-        }
-
-        .command-section {
-            margin-bottom: 40px;
-        }
-
-        .command-section h2 {
-            color: var(--primary-blue);
-            font-size: 2rem;
             font-weight: 700;
-            border-bottom: 2px solid var(--primary-blue);
-            padding-bottom: 12px;
-            margin-bottom: 30px;
-            text-shadow: 0 0 8px rgba(0, 207, 255, 0.5); /* Efeito neon no subtítulo */
+            margin: 0;
         }
 
-        /* --- Card de Comando Individual --- */
-        .command-card {
-            background-color: #121212; /* Fundo mais escuro para os cards */
-            border-radius: 10px;
-            padding: 30px;
+        .header-info p {
+            font-size: 0.85rem;
+            color: var(--subtle-text);
+            margin: 0;
+        }
+
+        /* --- Seção de Boas-Vindas e Pesquisa (Simulação) --- */
+        .welcome-section {
+            padding: 20px;
+        }
+
+        .welcome-section h2 {
+            font-size: 1.4rem;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .welcome-section p {
+            font-size: 0.95rem;
+            color: var(--subtle-text);
             margin-bottom: 20px;
-            border: 1px solid #222; /* Borda sutil */
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-            position: relative;
-            overflow: hidden;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 8px;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .search-bar::placeholder {
+            color: #666;
+        }
+
+        /* --- Lista de Comandos --- */
+        .command-list-header {
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: var(--subtle-text);
+            border-top: 1px solid var(--divider-color);
+            margin-top: 20px;
+        }
+
+        /* --- Card de Comando Individual (O coração do design) --- */
+        .command-card {
+            background-color: var(--card-bg); /* Fundo escuro */
+            border-radius: 8px;
+            margin: 0 20px 10px 20px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .command-card:hover {
+            background-color: #282828; /* Escurece um pouco no hover */
+        }
+
+        .command-card-title {
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+
+        .command-card-description {
+            font-size: 0.9rem;
+            color: var(--subtle-text);
+        }
+
+        /* --- Detalhes do Comando (Aberto após o clique) --- */
+        .details-section {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px;
+        }
+
+        .details-section h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+        }
+
+        .details-box {
+            background-color: #121212;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            border: 1px solid var(--divider-color);
+        }
+
+        .details-box p {
+            font-size: 0.9rem;
+            color: var(--subtle-text);
+            margin-bottom: 10px;
+        }
+
+        .details-box code {
+            display: block;
+            background-color: #000000;
+            color: var(--accent-color);
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            overflow-x: auto;
+        }
+
+        .how-to-use p {
+            font-size: 0.95rem;
+            color: var(--subtle-text);
+            margin-bottom: 20px;
         }
         
-        /* Borda neon animada no hover */
-        .command-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+        /* Botão principal (destaque) */
+        .main-button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            border: none;
             border-radius: 10px;
-            border: 2px solid transparent;
-            background: linear-gradient(45deg, rgba(0,207,255,0.0), var(--primary-blue), rgba(0,207,255,0.0)) border-box;
-            -webkit-mask: 
-                linear-gradient(#fff 0 0) padding-box, 
-                linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .command-card:hover::before {
-            opacity: 1;
-        }
-
-        .command-card h3 {
-            font-family: 'Roboto Mono', monospace;
-            color: var(--primary-blue);
-            font-size: 1.6rem;
-            margin-bottom: 12px;
-            text-shadow: 0 0 5px rgba(0, 207, 255, 0.5);
-        }
-
-        .command-card p {
-            color: var(--light-text);
-            font-size: 1.05rem;
-            margin-bottom: 25px;
-            font-weight: 300;
-        }
-
-        .command-card p code {
-            background-color: var(--code-bg);
-            padding: 4px 8px;
-            border-radius: 5px;
-            font-family: 'Roboto Mono', monospace;
-            font-size: 0.95em;
-            color: var(--primary-blue); /* Código também azul */
-            border: 1px solid #333;
-        }
-
-        .use-button {
-            display: inline-block;
-            background-color: var(--primary-blue);
-            color: #000000; /* Texto preto no botão azul */
-            padding: 14px 25px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 700;
+            background-color: var(--accent-color);
+            color: var(--button-text-color);
             text-align: center;
-            font-size: 1.05rem;
-            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 207, 255, 0.4); /* Sombra forte */
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.2s, opacity 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 15px rgba(0, 207, 255, 0.4);
         }
 
-        .use-button:hover {
-            background-color: #FFFFFF; /* Botão fica branco no hover */
-            color: var(--primary-blue); /* Texto azul no botão branco */
-            transform: translateY(-2px);
+        .main-button:hover {
+            background-color: #40dfff; /* Azul um pouco mais claro */
             box-shadow: 0 6px 20px rgba(0, 207, 255, 0.6);
         }
 
-        /* --- Rodapé --- */
+        /* --- Footer (Simples e discreto) --- */
         .footer {
+            padding: 15px;
             text-align: center;
-            padding: 30px;
-            background-color: #050505;
-            border-top: 1px solid #1A1A1A;
-            color: var(--light-text);
-            font-size: 0.9rem;
+            font-size: 0.8rem;
+            color: #555555;
+            border-top: 1px solid var(--divider-color);
+            margin-top: 20px;
         }
 
-        .footer p {
-            margin-bottom: 8px;
-        }
-
-        .footer a {
-            color: var(--primary-blue);
-            text-decoration: none;
-            font-weight: 700;
-            transition: color 0.3s ease;
-        }
-
-        .footer a:hover {
-            color: var(--white-text);
-            text-decoration: underline;
-        }
-
-        /* --- Design Responsivo (Tablet e Celular) --- */
-        
-        /* Para Tablets (até 768px de largura) */
-        @media (max-width: 768px) {
-            main {
-                padding: 30px;
-            }
-            .header h1 {
-                font-size: 2.5rem;
-            }
-            .header p {
-                font-size: 1.05rem;
-            }
-            .command-section h2 {
-                font-size: 1.8rem;
-            }
-            .command-card h3 {
-                font-size: 1.4rem;
-            }
-            .command-card p {
-                font-size: 1rem;
-            }
-            .use-button {
-                padding: 12px 20px;
-                font-size: 1rem;
-            }
-        }
-
-        /* Para Celulares (até 480px de largura) */
-        @media (max-width: 480px) {
+        /* --- Responsividade (Para dispositivos menores) --- */
+        @media (max-width: 450px) {
             body {
-                padding: 10px;
+                padding: 10px 5px;
             }
-            main {
-                padding: 20px;
+            .container {
+                border-radius: 0;
             }
             .header {
-                padding: 25px 15px;
+                padding: 15px 10px;
             }
             .header img {
-                max-width: 140px;
+                width: 40px;
+                height: 40px;
             }
-            .header h1 {
-                font-size: 2rem;
+            .header-info h1 {
+                font-size: 1.1rem;
             }
-            .header p {
-                font-size: 0.95rem;
-            }
-            .command-section h2 {
-                font-size: 1.5rem;
-                margin-bottom: 20px;
+            .welcome-section, .details-section {
+                padding: 15px;
             }
             .command-card {
-                padding: 20px;
-            }
-            .command-card h3 {
-                font-size: 1.25rem;
-            }
-            .command-card p {
-                font-size: 0.9rem;
-            }
-            /* Botão ocupa a largura total no celular para melhor usabilidade */
-            .use-button {
-                display: block;
-                width: 100%;
-                margin-top: 15px; /* Espaçamento extra acima do botão */
+                margin: 0 10px 8px 10px;
+                padding: 12px;
             }
         }
 
@@ -287,102 +263,103 @@
         
         <header class="header">
             <img src="https://i.ibb.co/2rxp0vR/photo-2025-11-08-03-16-48.jpg" alt="Logo Rock Consultas Bot">
-            <h1>Guia de Comandos</h1>
-            <p>Explore as funcionalidades do bot <a href="https://t.me/rockconsultasgratisbot" target="_blank">@rockconsultasgratisbot</a> e aprenda a utilizá-lo com agilidade e segurança.</p>
+            <div class="header-info">
+                <h1>Comandos</h1>
+                <p>Rock Consultas Bot</p>
+            </div>
         </header>
 
-        <main>
-            <section class="command-section">
-                <h2>Consultas Essenciais</h2>
+        <div class="welcome-section">
+            <h2>Bem-vindo!</h2>
+            <p>Aqui você encontra todos os comandos disponíveis para consultas. Use a barra de pesquisa (simulada) para encontrar comandos específicos.</p>
+            <input type="text" class="search-bar" placeholder="Pesquisar comandos...">
+        </div>
 
-                <div class="command-card">
-                    <h3>/cpf &lt;número&gt;</h3>
-                    <p>Obtenha informações detalhadas sobre um CPF.<br>Exemplo: <code>/cpf 12345678900</code></p>
-                    <a href="https://t.me/rockconsultasgratisbot" class="use-button" target="_blank">Usar no Bot</a>
-                </div>
+        <div class="command-list-header">
+            <span>Comandos Disponíveis</span>
+            <span>9 comandos</span>
+        </div>
 
-                <div class="command-card">
-                    <h3>/cnpj &lt;número&gt;</h3>
-                    <p>Consulte dados cadastrais e financeiros de uma empresa pelo CNPJ.<br>Exemplo: <code>/cnpj 12345678000100</code></p>
-                    <a href="https://t.me/rockconsultasgratisbot" class="use-button" target="_blank">Usar no Bot</a>
-                </div>
+        <div class="command-card" id="card-cpf">
+            <span class="command-card-title">CPF</span>
+            <span class="command-card-description">Consulta pessoas físicas a partir do número do CPF, retornando dados cadastrais, documentos principais e situação cadastral.</span>
+        </div>
 
-                <div class="command-card">
-                    <h3>/nome &lt;texto&gt;</h3>
-                    <p>Realize buscas abrangentes por informações vinculadas a um nome completo.<br>Exemplo: <code>/nome Joao da Silva</code></p>
-                    <a href="https://t.me/rockconsultasgratisbot" class="use-button" target="_blank">Usar no Bot</a>
-                </div>
+        <div class="command-card" id="card-foto">
+            <span class="command-card-title">FOTO</span>
+            <span class="command-card-description">Busca a foto associada ao CPF ou outras bases de dados disponíveis.</span>
+        </div>
+        
+        <div class="command-card">
+            <span class="command-card-title">PLACA</span>
+            <span class="command-card-description">Verifica dados completos de um veículo (Mercosul ou padrão antigo).</span>
+        </div>
 
-                <div class="command-card">
-                    <h3>/telefone &lt;número&gt;</h3>
-                    <p>Pesquise dados e titularidade associados a um número de telefone (com DDD).<br>Exemplo: <code>/telefone 11987654321</code></p>
-                    <a href="https://t.me/rockconsultasgratisbot" class="use-button" target="_blank">Usar no Bot</a>
-                </div>
+        <div class="command-card">
+            <span class="command-card-title">CNPJ</span>
+            <span class="command-card-description">Consulta dados cadastrais e financeiros de uma empresa pelo CNPJ.</span>
+        </div>
 
-                <div class="command-card">
-                    <h3>/placa &lt;placa&gt;</h3>
-                    <p>Verifique dados completos de um veículo (Mercosul ou padrão antigo).<br>Exemplo: <code>/placa ABC1234</code></p>
-                    <a href="https://t.me/rockconsultasgratisbot" class="use-button" target="_blank">Usar no Bot</a>
-                </div>
-            </section>
+        <div class="command-card">
+            <span class="command-card-title">TELEFONE</span>
+            <span class="command-card-description">Pesquisa dados e titularidade associados a um número de telefone (com DDD).</span>
+        </div>
+
+        <div class="command-card">
+            <span class="command-card-title">CNH</span>
+            <span class="command-card-description">Acesse informações da Carteira Nacional de Habilitação pelo CPF do titular.</span>
+        </div>
+
+        <div class="command-card">
+            <span class="command-card-title">EMAIL</span>
+            <span class="command-card-description">Consulte informações e possíveis vazamentos de dados de um endereço de e-mail.</span>
+        </div>
+        
+        <div class="command-card">
+            <span class="command-card-title">IP</span>
+            <span class="command-card-description">Obtenha detalhes de geolocalização e provedor de um endereço IP.</span>
+        </div>
+
+        <div class="command-card">
+            <span class="command-card-title">CEP</span>
+            <span class="command-card-description">Consulte o endereço completo e, se disponível, informações sobre moradores de um CEP.</span>
+        </div>
+
+
+        <div class="details-section">
+            <h3>Detalhes do comando CPF</h3>
             
-            <section class="command-section">
-                <h2>Outras Ferramentas de Consulta</h2>
-                
-                <div class="command-card">
-                    <h3>/cnh &lt;cpf&gt;</h3>
-                    <p>Acesse informações da Carteira Nacional de Habilitação pelo CPF do titular.<br>Exemplo: <code>/cnh 12345678900</code></p>
-                    <a href="https://t.me/rockconsultasgratisbot" class="use-button" target="_blank">Usar no Bot</a>
-                </div>
+            <div class="details-box">
+                <p>Consulta pessoas físicas a partir do número do CPF, retornando dados cadastrais, documentos principais e situação cadastral.</p>
+                <code>/cpf 82274320004</code>
+            </div>
 
-                <div class="command-card">
-                    <h3>/foto &lt;cpf&gt;</h3>
-                    <p>Busque a foto associada a um CPF (disponível em bases específicas).<br>Exemplo: <code>/foto 12345678900</code></p>
-                    <a href="https://t.me/rockconsultasgratisbot" class="use-button" target="_blank">Usar no Bot</a>
-                </div>
-
-                <div class="command-card">
-                    <h3>/email &lt;endereço&gt;</h3>
-                    <p>Consulte informações e possíveis vazamentos de dados de um endereço de e-mail.<br>Exemplo: <code>/email exemplo@dominio.com</code></p>
-                    <a href="https://t.me/rockconsultasgratisbot" class="use-button" target="_blank">Usar no Bot</a>
-                </div>
-
-                <div class="command-card">
-                    <h3>/ip &lt;endereço&gt;</h3>
-                    <p>Obtenha detalhes de geolocalização e provedor de um endereço IP.<br>Exemplo: <code>/ip 8.8.8.8</code></p>
-                    <a href="https://t.me/rockconsultasgratisbot" class="use-button" target="_blank">Usar no Bot</a>
-                </div>
-
-                <div class="command-card">
-                    <h3>/cep &lt;número&gt;</h3>
-                    <p>Consulte o endereço completo e, se disponível, informações sobre moradores de um CEP.<br>Exemplo: <code>/cep 01001000</code></p>
-                    <a href="https://t.me/rockconsultasgratisbot" class="use-button" target="_blank">Usar no Bot</a>
-                </div>
-            </section>
-
-            <section class="command-section">
-                <h2>Sua Conta e Planos</h2>
-
-                <div class="command-card">
-                    <h3>/start</h3>
-                    <p>Inicia o bot, exibindo o menu principal com seu status, plano atual e opções de afiliação.</p>
-                    <a href="https://t.me/rockconsultasgratisbot?start" class="use-button" target="_blank">Usar no Bot</a>
-                </div>
-                
-                <div class="command-card">
-                    <h3>/resgatar &lt;key&gt;</h3>
-                    <p>Ative um plano de acesso ou estenda sua assinatura utilizando uma chave de ativação.<br>Exemplo: <code>/resgatar MINHACHAVE12345</code></p>
-                    <a href="https://t.me/rockconsultasgratisbot" class="use-button" target="_blank">Usar no Bot</a>
-                </div>
-            </section>
-        </main>
-
+            <div class="how-to-use">
+                <p>Copie o comando acima e cole-o diretamente no chat do Telegram com o bot. O bot processará sua solicitação e retornará os resultados da consulta.</p>
+                <a href="https://t.me/rockconsultasgratisbot" class="main-button" target="_blank">Abrir bot no Telegram</a>
+            </div>
+            
+        </div>
+        
         <footer class="footer">
-            <p>Dúvidas, sugestões ou suporte técnico?</p>
-            <p>Fale com nosso administrador: <a href="https://t.me/zephyr008" target="_blank">@zephyr008</a></p>
-            <p>&copy; 2023-2025 <a href="https://t.me/rockconsultasgratisbot" target="_blank">@rockconsultasgratisbot</a>. Todos os direitos reservados.</p>
+            <p>@rockconsultasgratisbot. Todos os direitos reservados.</p>
         </footer>
 
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cpfCard = document.getElementById('card-cpf');
+            const detailsSection = document.querySelector('.details-section');
+
+            // Simplesmente torna o card clicável para focar no design
+            if (cpfCard && detailsSection) {
+                cpfCard.addEventListener('click', () => {
+                    detailsSection.scrollIntoView({ behavior: 'smooth' });
+                    // Em um projeto real, você mudaria o conteúdo do detailsSection
+                });
+            }
+        });
+    </script>
 </body>
 </html>
