@@ -1,4 +1,4 @@
--<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -277,7 +277,7 @@
 
         <div class="command-list-header">
             <span>Comandos Disponíveis</span>
-            <span>9 comandos</span>
+            <span>11 comandos</span>
         </div>
 
         <div class="command-card" id="card-cpf">
@@ -285,24 +285,14 @@
             <span class="command-card-description">Consulta pessoas físicas a partir do número do CPF, retornando dados cadastrais, documentos principais e situação cadastral.</span>
         </div>
 
-        <div class="command-card" id="card-foto">
-            <span class="command-card-title">FOTO</span>
-            <span class="command-card-description">Busca a foto associada ao CPF ou outras bases de dados disponíveis.</span>
-        </div>
-        
-        <div class="command-card">
-            <span class="command-card-title">PLACA</span>
-            <span class="command-card-description">Verifica dados completos de um veículo (Mercosul ou padrão antigo).</span>
-        </div>
-
-        <div class="command-card">
+        <div class="command-card" id="card-cnpj">
             <span class="command-card-title">CNPJ</span>
             <span class="command-card-description">Consulta dados cadastrais e financeiros de uma empresa pelo CNPJ.</span>
         </div>
 
         <div class="command-card">
-            <span class="command-card-title">TELEFONE</span>
-            <span class="command-card-description">Pesquisa dados e titularidade associados a um número de telefone (com DDD).</span>
+            <span class="command-card-title">FOTO</span>
+            <span class="command-card-description">Busca a foto associada a um CPF (disponível em bases específicas).</span>
         </div>
 
         <div class="command-card">
@@ -311,10 +301,25 @@
         </div>
 
         <div class="command-card">
+            <span class="command-card-title">NOME</span>
+            <span class="command-card-description">Realiza buscas abrangentes por informações vinculadas a um nome completo.</span>
+        </div>
+        
+        <div class="command-card">
+            <span class="command-card-title">TELEFONE</span>
+            <span class="command-card-description">Pesquisa dados e titularidade associados a um número de telefone (com DDD).</span>
+        </div>
+        
+        <div class="command-card">
             <span class="command-card-title">EMAIL</span>
             <span class="command-card-description">Consulte informações e possíveis vazamentos de dados de um endereço de e-mail.</span>
         </div>
         
+        <div class="command-card">
+            <span class="command-card-title">PLACA</span>
+            <span class="command-card-description">Verifique dados completos de um veículo (Mercosul ou padrão antigo).</span>
+        </div>
+
         <div class="command-card">
             <span class="command-card-title">IP</span>
             <span class="command-card-description">Obtenha detalhes de geolocalização e provedor de um endereço IP.</span>
@@ -325,13 +330,17 @@
             <span class="command-card-description">Consulte o endereço completo e, se disponível, informações sobre moradores de um CEP.</span>
         </div>
 
+        <div class="command-card">
+            <span class="command-card-title">RESGATAR</span>
+            <span class="command-card-description">Ative ou estenda sua assinatura utilizando uma chave de ativação.</span>
+        </div>
 
         <div class="details-section">
             <h3>Detalhes do comando CPF</h3>
             
             <div class="details-box">
                 <p>Consulta pessoas físicas a partir do número do CPF, retornando dados cadastrais, documentos principais e situação cadastral.</p>
-                <code>/cpf 82274320004</code>
+                <code>/cpf 12345678900</code>
             </div>
 
             <div class="how-to-use">
@@ -356,7 +365,7 @@
             if (cpfCard && detailsSection) {
                 cpfCard.addEventListener('click', () => {
                     detailsSection.scrollIntoView({ behavior: 'smooth' });
-                    // Em um projeto real, você mudaria o conteúdo do detailsSection
+                    // Em um projeto real, você mudaria o conteúdo do detailsSection para refletir o comando clicado.
                 });
             }
         });
