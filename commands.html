@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comandos - Rock Consultas Bot</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #121212;
+            color: #E0E0E0;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background-color: #1E1E1E;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .header img {
+            max-width: 150px;
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 15px;
+        }
+        .header h1 {
+            color: #FFFFFF;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        .header p {
+            font-size: 1.1em;
+            color: #BBBBBB;
+        }
+        .command-section {
+            margin-bottom: 30px;
+        }
+        .command-section h2 {
+            color: #FFFFFF;
+            font-size: 1.8em;
+            border-bottom: 2px solid #444;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .command-card {
+            background-color: #282828;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 5px solid #00BFFF; /* Detalhe azul */
+        }
+        .command-card h3 {
+            color: #00BFFF; /* Azul vibrante para o comando */
+            font-size: 1.5em;
+            margin: 0 0 10px 0;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        .command-card code {
+            background-color: #333;
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-size: 0.95em;
+        }
+        .command-card p {
+            color: #CCCCCC;
+            font-size: 1em;
+            margin: 0 0 15px 0;
+            line-height: 1.5;
+        }
+        .command-card .use-button {
+            display: inline-block;
+            background-color: #00BFFF;
+            color: #121212;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            text-align: center;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            max-width: 150px;
+        }
+        .command-card .use-button:hover {
+            background-color: #FFFFFF;
+            color: #121212;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #333333;
+            color: #BBBBBB;
+            font-size: 0.9em;
+        }
+        .footer a {
+            color: #00BFFF;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            .container {
+                padding: 20px;
+            }
+            .header h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="https://i.ibb.co/2rxp0vR/photo-2025-11-08-03-16-48.jpg" alt="Logo do Rock Consultas Bot">
+            <h1>Guia de Comandos</h1>
+            <p>Aprenda a utilizar os comandos de consulta do @rockconsultasgratisbot.</p>
+        </div>
+
+        <div class="command-section">
+            <h2>Comandos de Consulta</h2>
+
+            <div class="command-card">
+                <h3>/cpf &lt;número&gt;</h3>
+                <p>Consulta informações detalhadas de um CPF.<br>Exemplo: <code>/cpf 12345678900</code></p>
+                <a href="https://t.me/rockconsultasgratisbot" class="use-button" target="_blank">Usar no Bot</a>
+            </div>
+
+            <div class="command-card">
+                <h3>/cnpj &lt;número&gt;</h3>
+                <p>Consulta dados cadastrais de uma empresa (CNPJ).<br>Exemplo: <code>/cnpj 12345678000100</code></p>
+                <a href="https://t.me/rockconsultasgratisbot" class="use-button" target="_blank">Usar no Bot</a>
+            </div>
+
+            <div class="command-card">
+                <h3>/nome &lt;texto&gt;</h3>
+                <p>Busca informações vinculadas a um nome completo.<br>Exemplo: <code>/nome Joao da Silva</code></p>
+                <a href="https://t.me/rockconsultasgratisbot" class="use-button" target="_blank">Usar no Bot</a>
+            </div>
+
+            <div class="command-card">
+                <h3>/telefone &lt;número&gt;</h3>
+                <p>Procura dados associados a um número de telefone (com DDD).<br>Exemplo: <code>/telefone 11987654321</code></p>
+                <a href="https://t.me/rockconsultasgratisbot" class="use-button" target="_blank">Usar no Bot</a>
+            </div>
+
+            <div class="command-card">
+                <h3>/email &lt;endereço&gt;</h3>
+                <p>Consulta informações a partir de um e-mail.<br>Exemplo: <code>/email email@dominio.com</code></p>
+                <a href="https://t.me/rockconsultasgratisbot" class="use-button" target="_blank">Usar no Bot</a>
+            </div>
+
+            <div class="command-card">
+                <h3>/placa &lt;placa&gt;</h3>
+                <p>Verifica dados de um veículo (padrão Mercosul ou antigo).<br>Exemplo: <code>/placa ABC1234</code></p>
+                <a href="https://t.me/rockconsultasgratisbot" class="use-button" target="_blank">Usar no Bot</a>
+            </div>
+
+            <div class="command-card">
+                <h3>/cnh &lt;cpf&gt;</h3>
+                <p>Consulta dados da CNH a partir do CPF do titular.<br>Exemplo: <code>/cnh 12345678900</code></p>
+                <a href="https://t.me/rockconsultasgratisbot" class="use-button" target="_blank">Usar no Bot</a>
+            </div>
+
+            <div class="command-card">
+                <h3>/foto &lt;cpf&gt;</h3>
+                <p>Busca a foto de um CPF (disponível em bases específicas).<br>Exemplo: <code>/foto 12345678900</code></p>
+                <a href="https://t.me/rockconsultasgratisbot" class="use-button" target="_blank">Usar no Bot</a>
+            </div>
+
+            <div class="command-card">
+                <h3>/ip &lt;endereço&gt;</h3>
+                <p>Obtém informações de um endereço IP.<br>Exemplo: <code>/ip 8.8.8.8</code></p>
+                <a href="https://t.me/rockconsultasgratisbot" class="use-button" target="_blank">Usar no Bot</a>
+            </div>
+
+            <div class="command-card">
+                <h3>/cep &lt;número&gt;</h3>
+                <p>Consulta endereço e, se disponível, moradores de um CEP.<br>Exemplo: <code>/cep 01001000</code></p>
+                <a href="https://t.me/rockconsultasgratisbot" class="use-button" target="_blank">Usar no Bot</a>
+            </div>
+        </div>
+
+        <div class="command-section">
+            <h2>Comandos de Conta e Planos</h2>
+
+            <div class="command-card">
+                <h3>/start</h3>
+                <p>Inicia o bot e exibe o menu principal com seu status e plano atual.</p>
+                <a href="https://t.me/rockconsultasgratisbot?start" class="use-button" target="_blank">Usar no Bot</a>
+            </div>
+            
+            <div class="command-card">
+                <h3>/resgatar &lt;key&gt;</h3>
+                <p>Ativa um plano de acesso usando uma chave de ativação.<br>Exemplo: <code>/resgatar MINHACHAVE12345</code></p>
+                <a href="https://t.me/rockconsultasgratisbot" class="use-button" target="_blank">Usar no Bot</a>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Dúvidas ou suporte? Entre em contato com o administrador:</p>
+            <p><a href="https://t.me/zephyr008" target="_blank">@zephyr008</a></p>
+            <p>&copy; 2023-2025 @rockconsultasgratisbot</p>
+        </div>
+    </div>
+</body>
+</html>
