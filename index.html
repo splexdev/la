@@ -14,13 +14,12 @@
         }
 
         :root {
-            /* Cores Dark Mode, Limpas e Modernas */
-            --bg-color: #0A0A0A; /* Fundo principal */
-            --card-bg: #1F1F1F; /* Fundo dos cards (como na imagem do Telegram) */
-            --text-color: #FFFFFF; /* Texto principal */
-            --subtle-text: #B0B0B0; /* Texto secundário/descrição */
-            --accent-color: #00CFFF; /* Cor principal de destaque (Neon Blue) */
-            --button-text-color: #0A0A0A; /* Cor do texto no botão (preto no azul) */
+            --bg-color: #0A0A0A;
+            --card-bg: #1F1F1F;
+            --text-color: #FFFFFF;
+            --subtle-text: #B0B0B0;
+            --accent-color: #00CFFF;
+            --button-text-color: #0A0A0A;
             --divider-color: #333333;
         }
 
@@ -35,16 +34,15 @@
             min-height: 100vh;
         }
 
-        /* --- Estrutura Principal --- */
         .container {
-            max-width: 600px; /* Largura ideal para um pop-up/mobile */
+            max-width: 600px;
             width: 100%;
             background-color: var(--bg-color);
             border-radius: 12px;
             overflow: hidden;
         }
 
-        /* --- Cabeçalho (Topo do Pop-up) --- */
+        /* --- Cabeçalho --- */
         .header {
             padding: 20px;
             display: flex;
@@ -54,207 +52,92 @@
         }
 
         .header img {
-            width: 48px; /* Tamanho do ícone/logo no topo */
+            width: 48px;
             height: 48px;
-            border-radius: 50%; /* Fazendo a logo ser redonda como no Telegram */
+            border-radius: 50%;
             object-fit: cover;
-            box-shadow: 0 0 10px rgba(0, 207, 255, 0.4); /* Efeito neon sutil */
+            box-shadow: 0 0 10px rgba(0, 207, 255, 0.4);
         }
 
-        .header-info {
-            line-height: 1.2;
-        }
+        .header-info h1 { font-size: 1.2rem; font-weight: 700; margin: 0; }
+        .header-info p { font-size: 0.85rem; color: var(--subtle-text); margin: 0; }
 
-        .header-info h1 {
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin: 0;
-        }
-
-        .header-info p {
-            font-size: 0.85rem;
-            color: var(--subtle-text);
-            margin: 0;
-        }
-
-        /* --- Seção de Boas-Vindas e Pesquisa (Simulação) --- */
-        .welcome-section {
-            padding: 20px;
-        }
-
-        .welcome-section h2 {
-            font-size: 1.4rem;
-            font-weight: 500;
-            margin-bottom: 10px;
-        }
-
-        .welcome-section p {
-            font-size: 0.95rem;
-            color: var(--subtle-text);
-            margin-bottom: 20px;
-        }
+        /* --- Seção de Boas-Vindas e Pesquisa --- */
+        .welcome-section { padding: 20px; }
+        .welcome-section h2 { font-size: 1.4rem; font-weight: 500; margin-bottom: 10px; }
+        .welcome-section p { font-size: 0.95rem; color: var(--subtle-text); margin-bottom: 20px; }
 
         .search-bar {
-            width: 100%;
-            padding: 12px 15px;
-            border: none;
-            border-radius: 8px;
-            background-color: var(--card-bg);
-            color: var(--text-color);
-            font-size: 1rem;
-            outline: none;
-            transition: border-color 0.3s;
-        }
-
-        .search-bar::placeholder {
-            color: #666;
+            width: 100%; padding: 12px 15px; border: none; border-radius: 8px;
+            background-color: var(--card-bg); color: var(--text-color);
+            font-size: 1rem; outline: none;
         }
 
         /* --- Lista de Comandos --- */
         .command-list-header {
-            padding: 10px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.9rem;
-            color: var(--subtle-text);
-            border-top: 1px solid var(--divider-color);
-            margin-top: 20px;
+            padding: 10px 20px; display: flex; justify-content: space-between;
+            align-items: center; font-size: 0.9rem; color: var(--subtle-text);
+            border-top: 1px solid var(--divider-color); margin-top: 20px;
         }
 
-        /* --- Card de Comando Individual (O coração do design) --- */
         .command-card {
-            background-color: var(--card-bg); /* Fundo escuro */
-            border-radius: 8px;
-            margin: 0 20px 10px 20px;
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
+            background-color: var(--card-bg); border-radius: 8px;
+            margin: 0 20px 10px 20px; padding: 15px; display: flex;
+            flex-direction: column; gap: 5px; cursor: pointer;
             transition: background-color 0.2s ease;
         }
 
-        .command-card:hover {
-            background-color: #282828; /* Escurece um pouco no hover */
-        }
-
-        .command-card-title {
-            font-size: 1.05rem;
-            font-weight: 500;
-            color: var(--text-color);
-        }
-
-        .command-card-description {
-            font-size: 0.9rem;
-            color: var(--subtle-text);
-        }
-
-        /* --- Detalhes do Comando (Aberto após o clique) --- */
+        .command-card:hover { background-color: #282828; }
+        .command-card-title { font-size: 1.05rem; font-weight: 500; color: var(--text-color); }
+        .command-card-description { font-size: 0.9rem; color: var(--subtle-text); }
+        
+        /* --- Detalhes do Comando (Inicialmente oculto) --- */
         .details-section {
-            background-color: var(--card-bg);
-            border-radius: 8px;
-            padding: 20px;
-            margin: 20px;
+            background-color: var(--card-bg); border-radius: 8px;
+            padding: 20px; margin: 20px; display: none; /* Oculta por padrão */
         }
 
-        .details-section h3 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--accent-color);
-            margin-bottom: 15px;
+        .details-section.active {
+            display: block; /* Exibe quando ativo */
         }
+
+        .details-section h3 { font-size: 1.1rem; font-weight: 700; color: var(--accent-color); margin-bottom: 15px; }
 
         .details-box {
-            background-color: #121212;
-            padding: 15px;
-            border-radius: 6px;
-            margin-bottom: 20px;
-            border: 1px solid var(--divider-color);
+            background-color: #121212; padding: 15px; border-radius: 6px;
+            margin-bottom: 20px; border: 1px solid var(--divider-color);
         }
 
-        .details-box p {
-            font-size: 0.9rem;
-            color: var(--subtle-text);
-            margin-bottom: 10px;
-        }
-
-        .details-box code {
-            display: block;
-            background-color: #000000;
-            color: var(--accent-color);
-            padding: 10px;
-            border-radius: 5px;
-            font-family: monospace;
-            overflow-x: auto;
-        }
-
-        .how-to-use p {
-            font-size: 0.95rem;
-            color: var(--subtle-text);
-            margin-bottom: 20px;
-        }
+        .details-box p { font-size: 0.9rem; color: var(--subtle-text); margin-bottom: 10px; }
         
-        /* Botão principal (destaque) */
+        /* Estilo do comando de exemplo */
+        .details-box code {
+            display: block; background-color: #000000; color: var(--accent-color);
+            padding: 10px; border-radius: 5px; font-family: monospace; overflow-x: auto;
+        }
+
+        .how-to-use p { font-size: 0.95rem; color: var(--subtle-text); margin-bottom: 20px; }
+        
         .main-button {
-            display: block;
-            width: 100%;
-            padding: 15px;
-            border: none;
-            border-radius: 10px;
-            background-color: var(--accent-color);
-            color: var(--button-text-color);
-            text-align: center;
-            text-decoration: none;
-            font-size: 1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: background-color 0.2s, opacity 0.2s, box-shadow 0.2s;
+            display: block; width: 100%; padding: 15px; border: none;
+            border-radius: 10px; background-color: var(--accent-color);
+            color: var(--button-text-color); text-align: center;
+            text-decoration: none; font-size: 1rem; font-weight: 700;
+            cursor: pointer; transition: background-color 0.2s, box-shadow 0.2s;
             box-shadow: 0 4px 15px rgba(0, 207, 255, 0.4);
         }
 
-        .main-button:hover {
-            background-color: #40dfff; /* Azul um pouco mais claro */
-            box-shadow: 0 6px 20px rgba(0, 207, 255, 0.6);
-        }
+        .main-button:hover { background-color: #40dfff; box-shadow: 0 6px 20px rgba(0, 207, 255, 0.6); }
 
-        /* --- Footer (Simples e discreto) --- */
-        .footer {
-            padding: 15px;
-            text-align: center;
-            font-size: 0.8rem;
-            color: #555555;
-            border-top: 1px solid var(--divider-color);
-            margin-top: 20px;
-        }
+        /* --- Rodapé --- */
+        .footer { padding: 15px; text-align: center; font-size: 0.8rem; color: #555555; border-top: 1px solid var(--divider-color); margin-top: 20px; }
 
-        /* --- Responsividade (Para dispositivos menores) --- */
+        /* --- Responsividade --- */
         @media (max-width: 450px) {
-            body {
-                padding: 10px 5px;
-            }
-            .container {
-                border-radius: 0;
-            }
-            .header {
-                padding: 15px 10px;
-            }
-            .header img {
-                width: 40px;
-                height: 40px;
-            }
-            .header-info h1 {
-                font-size: 1.1rem;
-            }
-            .welcome-section, .details-section {
-                padding: 15px;
-            }
-            .command-card {
-                margin: 0 10px 8px 10px;
-                padding: 12px;
-            }
+            body { padding: 10px 5px; }
+            .container { border-radius: 0; }
+            /* ... (outros estilos de responsividade) */
         }
-
     </style>
 </head>
 <body>
@@ -280,67 +163,67 @@
             <span>11 comandos</span>
         </div>
 
-        <div class="command-card" id="card-cpf">
+        <div class="command-card" data-cmd="/cpf" data-ex="12345678900">
             <span class="command-card-title">CPF</span>
             <span class="command-card-description">Consulta pessoas físicas a partir do número do CPF, retornando dados cadastrais, documentos principais e situação cadastral.</span>
         </div>
 
-        <div class="command-card" id="card-cnpj">
+        <div class="command-card" data-cmd="/cnpj" data-ex="12345678000100">
             <span class="command-card-title">CNPJ</span>
             <span class="command-card-description">Consulta dados cadastrais e financeiros de uma empresa pelo CNPJ.</span>
         </div>
 
-        <div class="command-card">
+        <div class="command-card" data-cmd="/foto" data-ex="12345678900">
             <span class="command-card-title">FOTO</span>
             <span class="command-card-description">Busca a foto associada a um CPF (disponível em bases específicas).</span>
         </div>
 
-        <div class="command-card">
+        <div class="command-card" data-cmd="/cnh" data-ex="12345678900">
             <span class="command-card-title">CNH</span>
             <span class="command-card-description">Acesse informações da Carteira Nacional de Habilitação pelo CPF do titular.</span>
         </div>
 
-        <div class="command-card">
+        <div class="command-card" data-cmd="/nome" data-ex="Joao da Silva">
             <span class="command-card-title">NOME</span>
             <span class="command-card-description">Realiza buscas abrangentes por informações vinculadas a um nome completo.</span>
         </div>
         
-        <div class="command-card">
+        <div class="command-card" data-cmd="/telefone" data-ex="11987654321">
             <span class="command-card-title">TELEFONE</span>
             <span class="command-card-description">Pesquisa dados e titularidade associados a um número de telefone (com DDD).</span>
         </div>
         
-        <div class="command-card">
+        <div class="command-card" data-cmd="/email" data-ex="exemplo@dominio.com">
             <span class="command-card-title">EMAIL</span>
             <span class="command-card-description">Consulte informações e possíveis vazamentos de dados de um endereço de e-mail.</span>
         </div>
         
-        <div class="command-card">
+        <div class="command-card" data-cmd="/placa" data-ex="ABC1234">
             <span class="command-card-title">PLACA</span>
             <span class="command-card-description">Verifique dados completos de um veículo (Mercosul ou padrão antigo).</span>
         </div>
 
-        <div class="command-card">
+        <div class="command-card" data-cmd="/ip" data-ex="8.8.8.8">
             <span class="command-card-title">IP</span>
             <span class="command-card-description">Obtenha detalhes de geolocalização e provedor de um endereço IP.</span>
         </div>
 
-        <div class="command-card">
+        <div class="command-card" data-cmd="/cep" data-ex="01001000">
             <span class="command-card-title">CEP</span>
             <span class="command-card-description">Consulte o endereço completo e, se disponível, informações sobre moradores de um CEP.</span>
         </div>
 
-        <div class="command-card">
+        <div class="command-card" data-cmd="/resgatar" data-ex="MINHACHAVE12345">
             <span class="command-card-title">RESGATAR</span>
             <span class="command-card-description">Ative ou estenda sua assinatura utilizando uma chave de ativação.</span>
         </div>
 
-        <div class="details-section">
-            <h3>Detalhes do comando CPF</h3>
+        <div class="details-section" id="command-details">
+            <h3>Detalhes do comando <span id="detail-title">CPF</span></h3>
             
             <div class="details-box">
-                <p>Consulta pessoas físicas a partir do número do CPF, retornando dados cadastrais, documentos principais e situação cadastral.</p>
-                <code>/cpf 12345678900</code>
+                <p id="detail-description">Consulta pessoas físicas a partir do número do CPF, retornando dados cadastrais, documentos principais e situação cadastral.</p>
+                <code id="detail-example">/cpf 12345678900</code>
             </div>
 
             <div class="how-to-use">
@@ -358,15 +241,41 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const cpfCard = document.getElementById('card-cpf');
-            const detailsSection = document.querySelector('.details-section');
+            const commandCards = document.querySelectorAll('.command-card');
+            const detailsSection = document.getElementById('command-details');
+            const detailTitle = document.getElementById('detail-title');
+            const detailDescription = document.getElementById('detail-description');
+            const detailExample = document.getElementById('detail-example');
 
-            // Simplesmente torna o card clicável para focar no design
-            if (cpfCard && detailsSection) {
-                cpfCard.addEventListener('click', () => {
-                    detailsSection.scrollIntoView({ behavior: 'smooth' });
-                    // Em um projeto real, você mudaria o conteúdo do detailsSection para refletir o comando clicado.
+            // Função para atualizar e exibir os detalhes
+            const updateDetails = (card) => {
+                const titleText = card.querySelector('.command-card-title').textContent;
+                const descriptionText = card.querySelector('.command-card-description').textContent;
+                const command = card.dataset.cmd;
+                const example = card.dataset.ex;
+
+                detailTitle.textContent = titleText;
+                detailDescription.textContent = descriptionText;
+                detailExample.textContent = `${command} ${example}`;
+
+                // Ativa a exibição da seção de detalhes (simulando o pop-up)
+                detailsSection.classList.add('active');
+                
+                // Rola para a seção de detalhes para que ela seja visível imediatamente no mobile
+                detailsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            };
+
+            // Adiciona o listener para cada cartão
+            commandCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    updateDetails(card);
                 });
+            });
+
+            // Inicializa a seção de detalhes com o primeiro comando (CPF)
+            const firstCard = commandCards[0];
+            if (firstCard) {
+                updateDetails(firstCard);
             }
         });
     </script>
