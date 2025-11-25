@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Comandos - Rock Consultas Bot</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
     <style>
-        /* --- Reset Básico e Variáveis de Cores --- */
         * {
             margin: 0;
             padding: 0;
@@ -14,12 +13,11 @@
         }
 
         :root {
-            /* Cores Dark Mode */
             --bg-color: #0A0A0A;
             --card-bg: #1F1F1F;
             --text-color: #FFFFFF;
             --subtle-text: #B0B0B0;
-            --accent-color: #00CFFF; /* Azul Neon de Destaque */
+            --accent-color: #00CFFF;
             --button-text-color: #0A0A0A;
             --divider-color: #333333;
         }
@@ -35,12 +33,10 @@
             min-height: 100vh;
         }
 
-        /* FIX PROFISSIONAL: Impede que a tela de fundo role quando o modal estiver ativo */
         body.modal-open {
             overflow: hidden; 
         }
 
-        /* --- Estrutura Principal --- */
         .container {
             max-width: 600px;
             width: 100%;
@@ -50,17 +46,109 @@
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
         }
 
-        /* --- Estilos do Cabeçalho e Botão de Busca --- */
-        .header { padding: 20px; display: flex; align-items: center; gap: 15px; border-bottom: 1px solid var(--divider-color); }
-        .header img { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 10px rgba(0, 207, 255, 0.4); }
-        .header-info h1 { font-size: 1.2rem; font-weight: 700; margin: 0; }
-        .header-info p { font-size: 0.85rem; color: var(--subtle-text); margin: 0; }
+        .banner {
+            position: relative;
+            background: radial-gradient(circle at 30% 50%, #1a1a40 0%, #000000 100%);
+            padding: 40px 20px;
+            overflow: hidden;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--divider-color);
+        }
+
+        .banner-bg-icon {
+            position: absolute;
+            opacity: 0.05;
+            stroke: #fff;
+            fill: none;
+            stroke-width: 2;
+            z-index: 0;
+        }
+
+        .bg-glass-1 {
+            top: -20px;
+            left: 10%;
+            width: 80px;
+            height: 80px;
+            transform: rotate(-15deg);
+        }
+
+        .bg-glass-2 {
+            bottom: -30px;
+            right: 20%;
+            width: 120px;
+            height: 120px;
+            transform: rotate(15deg);
+        }
+
+        .banner-content {
+            z-index: 1;
+            max-width: 65%;
+        }
+
+        .banner-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+            line-height: 1.1;
+            margin-bottom: 10px;
+        }
+
+        .banner-subtitle {
+            font-size: 0.9rem;
+            color: #E0E0E0;
+            margin-bottom: 15px;
+            font-weight: 300;
+        }
+
+        .telegram-link {
+            display: inline-flex;
+            align-items: center;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.85rem;
+            background: rgba(0, 136, 204, 0.2);
+            padding: 6px 12px;
+            border-radius: 50px;
+            border: 1px solid rgba(0, 136, 204, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .telegram-link:hover {
+            background: rgba(0, 136, 204, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .telegram-icon {
+            width: 16px;
+            height: 16px;
+            fill: #0088cc;
+            margin-right: 8px;
+        }
+
+        .banner-graphic {
+            z-index: 1;
+            width: 140px;
+            height: auto;
+            filter: drop-shadow(0 0 15px rgba(100, 100, 255, 0.3));
+        }
+
+        .page-title {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-color);
+        }
+
         .welcome-section { padding: 20px; }
         .welcome-section h2 { font-size: 1.4rem; font-weight: 500; margin-bottom: 10px; }
         .welcome-section p { font-size: 0.95rem; color: var(--subtle-text); margin-bottom: 20px; }
         .search-bar { width: 100%; padding: 12px 15px; border: none; border-radius: 8px; background-color: var(--card-bg); color: var(--text-color); font-size: 1rem; outline: none; }
         
-        /* --- Estilos dos Cards de Comando --- */
         .command-list-header { padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem; color: var(--subtle-text); border-top: 1px solid var(--divider-color); margin-top: 20px; }
         .command-card {
             background-color: var(--card-bg); border-radius: 8px;
@@ -72,7 +160,6 @@
         .command-card-title { font-size: 1.05rem; font-weight: 500; color: var(--text-color); }
         .command-card-description { font-size: 0.9rem; color: var(--subtle-text); }
         
-        /* --- Estilo do Modal Flutuante (Pop-up) --- */
         .details-section {
             position: fixed; 
             top: 0;
@@ -87,7 +174,6 @@
             z-index: 1000;
             overflow-y: auto;
             
-            /* Animação e Ocultação */
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.3s ease, visibility 0.3s ease;
@@ -98,7 +184,6 @@
             visibility: visible;
         }
         
-        /* Card interno do pop-up (Simulando a tela do Telegram) */
         .details-content {
             background-color: var(--card-bg);
             border-radius: 12px;
@@ -124,7 +209,6 @@
         }
         .close-button:hover { color: var(--text-color); }
 
-        /* Estilos internos do pop-up */
         .details-content h3 { font-size: 1.1rem; font-weight: 700; color: var(--text-color); margin-bottom: 15px; }
         .details-box { background-color: #121212; padding: 15px; border-radius: 6px; margin-bottom: 20px; border: 1px solid var(--divider-color); }
         .details-box p { font-size: 0.9rem; color: var(--subtle-text); margin-bottom: 10px; }
@@ -140,21 +224,68 @@
         }
         .main-button:hover { background-color: #40dfff; box-shadow: 0 6px 20px rgba(0, 207, 255, 0.6); }
 
-        /* --- Rodapé --- */
         .footer { padding: 15px; text-align: center; font-size: 0.8rem; color: #555555; border-top: 1px solid var(--divider-color); margin-top: 20px; }
+
+        @media (max-width: 480px) {
+            .banner { padding: 30px 15px; flex-direction: column; text-align: center; }
+            .banner-content { max-width: 100%; margin-bottom: 20px; }
+            .banner-graphic { width: 120px; }
+            .page-title { font-size: 1.5rem; }
+        }
     </style>
 </head>
 <body>
 
     <div class="container">
         
-        <header class="header">
-            <img src="https://i.ibb.co/2rxp0vR/photo-2025-11-08-03-16-48.jpg" alt="Logo Rock Consultas Bot">
-            <div class="header-info">
-                <h1>Comandos</h1>
-                <p>Rock Consultas Bot</p>
+        <div class="banner">
+            <svg class="banner-bg-icon bg-glass-1" viewBox="0 0 24 24">
+                <path d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M21 21L16.65 16.65" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <svg class="banner-bg-icon bg-glass-2" viewBox="0 0 24 24">
+                <path d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M21 21L16.65 16.65" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+
+            <div class="banner-content">
+                <div class="banner-title">Rock<br>Consultas</div>
+                <div class="banner-subtitle">Soluções em dados</div>
+                <a href="https://t.me/rockconsultasgratisbot" target="_blank" class="telegram-link">
+                    <svg class="telegram-icon" viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.25-5.54 3.69-.52.36-1 .53-1.42.52-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.24.29-.48.79-.74 3.08-1.34 5.15-2.23 6.21-2.66 3.03-1.23 3.66-1.44 4.07-1.44.09 0 .28.02.41.12.11.08.14.19.15.26v.06z"/>
+                    </svg>
+                    t.me/rockconsultas
+                </a>
             </div>
-        </header>
+
+            <div class="banner-graphic-container">
+                <svg class="banner-graphic" viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="paperGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#7c82ff;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#4a50c0;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <g transform="translate(20, 20) rotate(-5)">
+                        <rect x="10" y="10" width="140" height="100" rx="2" fill="#333366" stroke="#5555aa" stroke-width="2"/>
+                        <rect x="5" y="5" width="140" height="100" rx="2" fill="#444488" stroke="#6666cc" stroke-width="2"/>
+                        <rect x="0" y="0" width="140" height="100" rx="2" fill="url(#paperGrad)" stroke="#aaccff" stroke-width="1.5"/>
+                        
+                        <rect x="15" y="15" width="40" height="35" fill="rgba(255,255,255,0.2)"/>
+                        <rect x="65" y="15" width="60" height="8" rx="2" fill="rgba(255,255,255,0.3)"/>
+                        <rect x="65" y="28" width="60" height="4" rx="1" fill="rgba(255,255,255,0.2)"/>
+                        <rect x="65" y="36" width="50" height="4" rx="1" fill="rgba(255,255,255,0.2)"/>
+                        
+                        <rect x="15" y="60" width="110" height="4" rx="1" fill="rgba(255,255,255,0.2)"/>
+                        <rect x="15" y="70" width="110" height="4" rx="1" fill="rgba(255,255,255,0.2)"/>
+                        <rect x="15" y="80" width="80" height="4" rx="1" fill="rgba(255,255,255,0.2)"/>
+                    </g>
+                </svg>
+            </div>
+        </div>
+
+        <h1 class="page-title">Comandos</h1>
 
         <div class="welcome-section">
             <h2>Bem-vindo!</h2>
@@ -252,58 +383,45 @@
             const detailsSection = document.getElementById('command-details');
             const closeButton = document.getElementById('close-details');
             
-            // Elementos dinâmicos dentro do modal
             const detailTitle = document.getElementById('detail-title');
             const detailDescription = document.getElementById('detail-description');
             const detailExample = document.getElementById('detail-example');
 
-            // 1. Função para abrir o modal
             const updateDetails = (card) => {
                 const titleText = card.querySelector('.command-card-title').textContent;
                 const descriptionText = card.querySelector('.command-card-description').textContent;
                 const command = card.dataset.cmd;
                 const example = card.dataset.ex;
 
-                // Preenche o conteúdo do modal
                 detailTitle.textContent = titleText;
                 detailDescription.textContent = descriptionText;
                 detailExample.textContent = `${command} ${example}`;
 
-                // Exibe o modal
                 detailsSection.classList.add('active');
-                // Bloqueia o scroll do corpo
                 document.body.classList.add('modal-open'); 
             };
 
-            // 2. Função para fechar o modal
             const closeDetails = () => {
-                // Oculta o modal
                 detailsSection.classList.remove('active');
-                // Libera o scroll do corpo
                 document.body.classList.remove('modal-open');
             };
 
-            // Adiciona o listener para cada cartão (ABRIR)
             commandCards.forEach(card => {
                 card.addEventListener('click', () => {
                     updateDetails(card);
                 });
             });
 
-            // Adiciona o listener para o botão de fechar e clique no fundo (FECHAR)
             closeButton.addEventListener('click', closeDetails);
 
             detailsSection.addEventListener('click', (e) => {
-                // Se o clique foi exatamente no fundo do modal (details-section), feche.
                 if (e.target.id === 'command-details') {
                     closeDetails();
                 }
             });
 
-            // Inicializa a seção de detalhes com o primeiro comando para garantir o carregamento
             const firstCard = commandCards[0];
             if (firstCard) {
-                // Preenche o modal ao carregar, mas não o exibe.
                 detailTitle.textContent = firstCard.querySelector('.command-card-title').textContent;
                 detailDescription.textContent = firstCard.querySelector('.command-card-description').textContent;
                 detailExample.textContent = `${firstCard.dataset.cmd} ${firstCard.dataset.ex}`;
