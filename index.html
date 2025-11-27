@@ -1,108 +1,301 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>T7 Buscas — Termos de Uso</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            primary: '#A855F7', // Violeta vibrante para destaque (combina com o logo)
-            dark: '#110A1A', // Fundo roxo escuro
-            surface: '#251A3B', // Superfície dos cartões
-            border: '#4C3A68', // Borda e divisores
-            text: '#FFFFFF', // Texto principal (branco)
-            textMuted: '#D8B4FE' // Texto secundário (roxo claro)
-          },
-          fontFamily: { 'sans': ['Inter', 'system-ui', 'sans-serif'] }
-        }
-      }
-    }
-  </script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia de Comandos T7 Buscas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d1117;
+            color: #c9d1d9;
+        }
+        .container {
+            max-width: 900px;
+        }
+        .command-card {
+            background-color: #161b22;
+            border-left: 4px solid #1f6feb;
+            transition: transform 0.2s;
+        }
+        .command-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(31, 110, 235, 0.2);
+        }
+        .admin-card {
+            border-left: 4px solid #ff4d4d;
+        }
+        .admin-card:hover {
+            box-shadow: 0 4px 15px rgba(255, 77, 77, 0.2);
+        }
+        .code-block {
+            background-color: #24292f;
+            color: #58a6ff;
+        }
+        .badge {
+            font-size: 0.75rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 9999px;
+            font-weight: 600;
+        }
+    </style>
 </head>
-<body class="bg-dark text-text font-sans min-h-screen">
-  <div class="max-w-2xl mx-auto px-4 py-8">
+<body class="p-4 sm:p-8">
 
-    <!-- Header ajustado para a paleta roxa/magenta -->
-    <div class="bg-surface border border-border rounded-2xl p-5 mb-6 flex items-center gap-4">
-      <img src="https://i.ibb.co/Hf8rtCHL/t7shop.png" alt="Logo T7" class="w-12 h-12 rounded-full border-2 border-primary p-0.5 shadow-lg shadow-primary/20">
-      <div>
-        <h1 class="text-xl font-bold text-primary">T7 Buscas</h1>
-        <p class="text-textMuted text-sm">Termos de Uso</p>
-      </div>
-    </div>
+    <div class="container mx-auto">
 
-    <!-- Terms Card -->
-    <div class="bg-surface border border-border rounded-2xl p-6 space-y-6">
- 
-      <p class="text-textMuted text-sm border-b border-border pb-4">Ao utilizar este bot, você concorda automaticamente com os termos abaixo.</p>
+        <!-- Header -->
+        <header class="text-center mb-10">
+            <h1 class="text-4xl sm:text-5xl font-extrabold text-white mb-2">Guia de Comandos do T7 Buscas</h1>
+            <p class="text-lg text-gray-400">Tudo que você precisa saber para usar o bot de forma eficiente.</p>
+        </header>
 
-      <div class="space-y-6">
-        <div>
-          <h3 class="font-semibold text-primary">1. Finalidade do Serviço</h3>
-          <p class="text-textMuted text-sm">Este bot oferece consultas de dados obtidos de fontes públicas ou autorizadas. As informações retornadas têm caráter informativo e podem variar de acordo com a disponibilidade e atualização das fontes consultadas.</p>
-        </div>
+        <!-- Seção de Consultas -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold text-[#1f6feb] mb-6 border-b border-[#1f6feb] pb-2">Comandos de Consulta (Requer Plano Ativo)</h2>
+            <div class="space-y-4">
 
-        <div>
-          <h3 class="font-semibold text-primary">2. Responsabilidade do Usuário</h3>
-          <ul class="text-textMuted text-sm list-disc pl-5 space-y-1">
-            <li>O usuário é inteiramente responsável pelo uso das informações obtidas.</li>
-            <li>É proibido utilizar o serviço para qualquer fim ilegal, imoral ou que viole direitos de terceiros.</li>
-            <li>Qualquer uso irregular é de responsabilidade exclusiva do usuário.</li>
-          </ul>
-        </div>
+                <!-- CPF -->
+                <div class="command-card p-4 rounded-lg">
+                    <h3 class="text-xl font-semibold text-white">/cpf</h3>
+                    <p class="text-gray-400 mt-1">Realiza consultas detalhadas utilizando o CPF.</p>
+                    <div class="code-block mt-3 p-2 rounded-md">
+                        <code class="text-sm">/cpf [Número do CPF]</code>
+                    </div>
+                    <p class="text-gray-500 mt-2 text-sm">Exemplo: <code>/cpf 12345678900</code></p>
+                </div>
 
-        <div>
-          <h3 class="font-semibold text-primary">3. Pedidos de Estorno Direto no Banco (MED)</h3>
-          <p class="text-textMuted text-sm">Caso o usuário realize <strong>pedido de reembolso diretamente pelo banco (MED)</strong>, ou tente contestar o pagamento alegando cobrança indevida <em>após ter utilizado o serviço</em>, a conta será <strong>desativada permanentemente</strong>. Nesses casos, <strong>não haverá direito a reembolso</strong>, independentemente do motivo apresentado. Esta medida visa proteger o serviço contra tentativas de fraude ou má-fé.</p>
-        </div>
+                <!-- Nome -->
+                <div class="command-card p-4 rounded-lg">
+                    <h3 class="text-xl font-semibold text-white">/nome</h3>
+                    <p class="text-gray-400 mt-1">Pesquisa informações a partir do Nome.</p>
+                    <div class="code-block mt-3 p-2 rounded-md">
+                        <code class="text-sm">/nome [Nome Completo ou Parcial]</code>
+                    </div>
+                    <p class="text-gray-500 mt-2 text-sm">Exemplo: <code>/nome Maria da Silva</code></p>
+                </div>
 
-        <div>
-          <h3 class="font-semibold text-primary">4. LGPD – Tratamento de Dados</h3>
-          <p class="text-textMuted text-sm">Este serviço opera em conformidade com a <strong>Lei Geral de Proteção de Dados (Lei nº 13.709/2018)</strong>. Nenhum dado consultado é armazenado de forma permanente ou repassado a terceiros. O bot funciona apenas como intermediador de consultas, não coletando para uso próprio dados pessoais dos usuários ou consultados, exceto quando estritamente necessário e com base legal adequada.</p>
-        </div>
+                <!-- Telefone -->
+                <div class="command-card p-4 rounded-lg">
+                    <h3 class="text-xl font-semibold text-white">/telefone</h3>
+                    <p class="text-gray-400 mt-1">Busca dados associados a um número de telefone (DDD + Número).</p>
+                    <div class="code-block mt-3 p-2 rounded-md">
+                        <code class="text-sm">/telefone [Número de Telefone com DDD]</code>
+                    </div>
+                    <p class="text-gray-500 mt-2 text-sm">Exemplo: <code>/telefone 11987654321</code></p>
+                </div>
 
-        <div>
-          <h3 class="font-semibold text-primary">5. Política de Reembolso</h3>
-          <p class="text-textMuted text-sm">O reembolso <strong>só será realizado se o usuário não tiver utilizado o serviço nenhuma vez</strong> após o pagamento. Se qualquer consulta tiver sido feita, <strong>o reembolso não será possível</strong>. Solicitações de reembolso devem ser realizadas diretamente com o suporte dentro de 7 dias após o pagamento.</p>
-        </div>
+                <!-- CNPJ -->
+                <div class="command-card p-4 rounded-lg">
+                    <h3 class="text-xl font-semibold text-white">/cnpj</h3>
+                    <p class="text-gray-400 mt-1">Realiza consultas de informações cadastrais e societárias de empresas.</p>
+                    <div class="code-block mt-3 p-2 rounded-md">
+                        <code class="text-sm">/cnpj [Número do CNPJ]</code>
+                    </div>
+                    <p class="text-gray-500 mt-2 text-sm">Exemplo: <code>/cnpj 00000000000000</code></p>
+                </div>
+
+                <!-- Email -->
+                <div class="command-card p-4 rounded-lg">
+                    <h3 class="text-xl font-semibold text-white">/email</h3>
+                    <p class="text-gray-400 mt-1">Busca por dados atrelados a um endereço de e-mail.</p>
+                    <div class="code-block mt-3 p-2 rounded-md">
+                        <code class="text-sm">/email [Endereço de E-mail]</code>
+                    </div>
+                    <p class="text-gray-500 mt-2 text-sm">Exemplo: <code>/email exemplo@dominio.com</code></p>
+                </div>
+
+                <!-- Placa -->
+                <div class="command-card p-4 rounded-lg">
+                    <h3 class="text-xl font-semibold text-white">/placa</h3>
+                    <p class="text-gray-400 mt-1">Consulta informações de veículos através da placa.</p>
+                    <div class="code-block mt-3 p-2 rounded-md">
+                        <code class="text-sm">/placa [Placa do Veículo]</code>
+                    </div>
+                    <p class="text-gray-500 mt-2 text-sm">Exemplo: <code>/placa ABC1234</code></p>
+                </div>
+
+                <!-- IP -->
+                <div class="command-card p-4 rounded-lg">
+                    <h3 class="text-xl font-semibold text-white">/ip</h3>
+                    <p class="text-gray-400 mt-1">Realiza geolocalização e busca de provedor de um endereço IP.</p>
+                    <div class="code-block mt-3 p-2 rounded-md">
+                        <code class="text-sm">/ip [Endereço IP]</code>
+                    </div>
+                    <p class="text-gray-500 mt-2 text-sm">Exemplo: <code>/ip 192.168.1.1</code></p>
+                </div>
+
+                <!-- CEP -->
+                <div class="command-card p-4 rounded-lg">
+                    <h3 class="text-xl font-semibold text-white">/cep</h3>
+                    <p class="text-gray-400 mt-1">Busca informações de endereço e áreas relacionadas a um CEP.</p>
+                    <div class="code-block mt-3 p-2 rounded-md">
+                        <code class="text-sm">/cep [Número do CEP]</code>
+                    </div>
+                    <p class="text-gray-500 mt-2 text-sm">Exemplo: <code>/cep 01001000</code></p>
+                </div>
+                
+                <!-- CNH -->
+                <div class="command-card p-4 rounded-lg">
+                    <h3 class="text-xl font-semibold text-white">/cnh</h3>
+                    <p class="text-gray-400 mt-1">Consulta dados relacionados à Carteira Nacional de Habilitação (geralmente por CPF).</p>
+                    <div class="code-block mt-3 p-2 rounded-md">
+                        <code class="text-sm">/cnh [CPF ou Número da CNH]</code>
+                    </div>
+                    <p class="text-gray-500 mt-2 text-sm">Exemplo: <code>/cnh 12345678900</code></p>
+                </div>
+
+                <!-- PIX -->
+                <div class="command-card p-4 rounded-lg">
+                    <h3 class="text-xl font-semibold text-white">/pix</h3>
+                    <p class="text-gray-400 mt-1">Busca o nome e CPF/CNPJ de um titular do PIX a partir da chave.</p>
+                    <div class="code-block mt-3 p-2 rounded-md">
+                        <code class="text-sm">/pix [Nome/Descrição] | [Chave PIX]</code>
+                    </div>
+                    <p class="text-gray-500 mt-2 text-sm">Exemplo: <code>/pix Maria Silva | 12345678900</code></p>
+                </div>
+
+                <!-- Foto -->
+                <div class="command-card p-4 rounded-lg">
+                    <h3 class="text-xl font-semibold text-white">/foto</h3>
+                    <p class="text-gray-400 mt-1">Consulta a foto do titular do CPF. <span class="text-yellow-400">(Acesso restrito em planos gratuitos de grupo)</span></p>
+                    <div class="code-block mt-3 p-2 rounded-md">
+                        <code class="text-sm">/foto [Número do CPF]</code>
+                    </div>
+                    <p class="text-gray-500 mt-2 text-sm">Exemplo: <code>/foto 12345678900</code></p>
+                </div>
+
+            </div>
+        </section>
         
-        <!-- Novo Item 6: Interrupção e Encerramento do Serviço -->
-        <div>
-          <h3 class="font-semibold text-primary">6. Interrupção e Encerramento do Serviço</h3>
-          <p class="text-textMuted text-sm mb-2">Reservamo-nos o direito de interromper ou encerrar o fornecimento do serviço a qualquer momento, por quaisquer motivos, incluindo, mas não se limitando a:</p>
-          <ul class="text-textMuted text-sm list-disc pl-5 space-y-1">
-            <li>Instabilidade ou quedas técnicas do sistema.</li>
-            <li>Recebimento de bans ou restrições de plataformas.</li>
-            <li>Determinações legais ou ordens judiciais.</li>
-            <li>Violação destes Termos de Uso por parte do usuário.</li>
-          </ul>
-          <p class="text-textMuted text-sm mt-3">Em caso de interrupção ou encerramento, não haverá direito a reembolso por créditos ou tempo de serviço restantes, exceto conforme explicitamente previsto na "Política de Reembolso" para casos de não utilização inicial.</p>
-        </div>
+        <!-- Seção de Afiliado/Plano -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold text-[#1f6feb] mb-6 border-b border-[#1f6feb] pb-2">Comandos de Usuário (Afiliado/Plano)</h2>
+            <div class="space-y-4">
+                 <!-- Start -->
+                <div class="command-card p-4 rounded-lg">
+                    <h3 class="text-xl font-semibold text-white">/start</h3>
+                    <p class="text-gray-400 mt-1">Inicia o bot e exibe o menu principal, com status do plano e opções.</p>
+                    <div class="code-block mt-3 p-2 rounded-md">
+                        <code class="text-sm">/start</code>
+                    </div>
+                </div>
+
+                <!-- Resgatar Chave -->
+                <div class="command-card p-4 rounded-lg">
+                    <h3 class="text-xl font-semibold text-white">/resgatar</h3>
+                    <p class="text-gray-400 mt-1">Resgata um plano (dias de acesso) usando uma chave de ativação.</p>
+                    <div class="code-block mt-3 p-2 rounded-md">
+                        <code class="text-sm">/resgatar [Key de 32 dígitos]</code>
+                    </div>
+                    <p class="text-gray-500 mt-2 text-sm">Exemplo: <code>/resgatar a1b2c3d4...z0</code></p>
+                </div>
+
+                <!-- Sacar Saldo (Afiliado) -->
+                <div class="command-card p-4 rounded-lg">
+                    <h3 class="text-xl font-semibold text-white">/sacar</h3>
+                    <p class="text-gray-400 mt-1">Inicia o processo de saque do saldo de afiliação, informando a chave PIX.</p>
+                    <div class="code-block mt-3 p-2 rounded-md">
+                        <code class="text-sm">/sacar [Chave PIX]</code>
+                    </div>
+                    <p class="text-gray-500 mt-2 text-sm">Exemplo: <code>/sacar 12345678900</code></p>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Seção de Administração -->
+        <section>
+            <h2 class="text-2xl font-bold text-[#ff4d4d] mb-6 border-b border-[#ff4d4d] pb-2">Comandos de Administração (Exclusivo para OWNER_ID)</h2>
+            <div class="space-y-4">
+
+                <!-- Ban -->
+                <div class="command-card admin-card p-4 rounded-lg">
+                    <h3 class="text-xl font-semibold text-white">/ban</h3>
+                    <p class="text-gray-400 mt-1">Bloqueia um usuário ou grupo de usar o bot.</p>
+                    <div class="code-block mt-3 p-2 rounded-md">
+                        <code class="text-sm">/ban [ID do Usuário ou Grupo]</code>
+                    </div>
+                    <p class="text-gray-500 mt-2 text-sm">Exemplo: <code>/ban 123456789</code> ou <code>/ban -1001234567890</code></p>
+                </div>
+
+                <!-- Unban -->
+                <div class="command-card admin-card p-4 rounded-lg">
+                    <h3 class="text-xl font-semibold text-white">/unban</h3>
+                    <p class="text-gray-400 mt-1">Desbloqueia um usuário ou grupo.</p>
+                    <div class="code-block mt-3 p-2 rounded-md">
+                        <code class="text-sm">/unban [ID do Usuário ou Grupo]</code>
+                    </div>
+                </div>
+
+                <!-- Add (Dias) -->
+                <div class="command-card admin-card p-4 rounded-lg">
+                    <h3 class="text-xl font-semibold text-white">/add</h3>
+                    <p class="text-gray-400 mt-1">Adiciona dias de acesso a um usuário. <span class="text-yellow-400">(Atenção: o último parâmetro é a razão para ser enviada ao usuário)</span></p>
+                    <div class="code-block mt-3 p-2 rounded-md">
+                        <code class="text-sm">/add [ID do Usuário] [Dias] [Razão]</code>
+                    </div>
+                    <p class="text-gray-500 mt-2 text-sm">Exemplo: <code>/add 123456789 7d Manutenção de sistema</code></p>
+                </div>
+
+                <!-- Aprovar Saque -->
+                <div class="command-card admin-card p-4 rounded-lg">
+                    <h3 class="text-xl font-semibold text-white">/aprovar</h3>
+                    <p class="text-gray-400 mt-1">Aprova um saque pendente de afiliado. O ID do saque é o ID do usuário.</p>
+                    <div class="code-block mt-3 p-2 rounded-md">
+                        <code class="text-sm">/aprovar [ID do Usuário/Saque]</code>
+                    </div>
+                </div>
+
+                <!-- Gerar Key -->
+                <div class="command-card admin-card p-4 rounded-lg">
+                    <h3 class="text-xl font-semibold text-white">/key</h3>
+                    <p class="text-gray-400 mt-1">Gera uma chave de resgate (key) para planos, exibindo um menu interativo.</p>
+                    <div class="code-block mt-3 p-2 rounded-md">
+                        <code class="text-sm">/key</code>
+                    </div>
+                </div>
+
+                <!-- Envio de Mensagem (Broadcast) -->
+                <div class="command-card admin-card p-4 rounded-lg">
+                    <h3 class="text-xl font-semibold text-white">/send</h3>
+                    <p class="text-gray-400 mt-1">Inicia o envio de mensagens (broadcast) para todos os grupos ou usuários. Exibe um menu interativo.</p>
+                    <div class="code-block mt-3 p-2 rounded-md">
+                        <code class="text-sm">/send</code>
+                    </div>
+                </div>
+
+                <!-- Envio de Venda VIP -->
+                <div class="command-card admin-card p-4 rounded-lg">
+                    <h3 class="text-xl font-semibold text-white">/vip</h3>
+                    <p class="text-gray-400 mt-1">Inicia o envio de uma mensagem de venda de acesso ao grupo VIP. Requer o ID do grupo VIP e o preço.</p>
+                    <div class="code-block mt-3 p-2 rounded-md">
+                        <code class="text-sm">/vip [ID do Grupo VIP] [Preço]</code>
+                    </div>
+                    <p class="text-gray-500 mt-2 text-sm">Exemplo: <code>/vip -1001234567890 24,90</code></p>
+                </div>
+                
+                <!-- Envio de Promoção -->
+                <div class="command-card admin-card p-4 rounded-lg">
+                    <h3 class="text-xl font-semibold text-white">/promo</h3>
+                    <p class="text-gray-400 mt-1">Cria e envia uma promoção temporária de planos. Requer preço, duração em dias e limite de vendas.</p>
+                    <div class="code-block mt-3 p-2 rounded-md">
+                        <code class="text-sm">/promo [Preço] [Dias] [Limite]</code>
+                    </div>
+                    <p class="text-gray-500 mt-2 text-sm">Exemplo: <code>/promo 19,90 30 10</code></p>
+                </div>
+
+            </div>
+        </section>
         
-        <!-- Item 7 (Antigo 6) Renumerado -->
-        <div>
-          <h3 class="font-semibold text-primary">7. Aceitação dos Termos</h3>
-          <p class="text-textMuted text-sm">Ao utilizar o bot, o usuário confirma que leu e concorda com todos os termos acima. Caso não concorde, deve interromper imediatamente o uso do serviço.</p>
-        </div>
-      </div>
+        <!-- Rodapé -->
+        <footer class="mt-12 text-center text-gray-500 text-sm border-t border-gray-700 pt-4">
+            <p>Seja direto e use o formato correto para garantir a precisão da consulta.</p>
+        </footer>
 
-      <!-- Footer actions -->
-      <div class="pt-4 border-t border-border mt-6">
-       
-        <p class="text-textMuted text-xs mt-3">Contato de suporte: <strong>@Rock</strong></p>
-      </div>
-    </div>
-
-    <p class="text-textMuted text-xs text-center mt-6">© <span id="year"></span> T7 Buscas — Todos os direitos reservados.</p>
-  </div>
-
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+    </div>
 </body>
 </html>
