@@ -1,432 +1,108 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comandos - Rock Consultas Bot</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --bg-color: #0A0A0A;
-            --card-bg: #1F1F1F;
-            --text-color: #FFFFFF;
-            --subtle-text: #B0B0B0;
-            --accent-color: #00CFFF;
-            --button-text-color: #0A0A0A;
-            --divider-color: #333333;
-        }
-
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.5;
-            padding: 20px 10px;
-            display: flex;
-            justify-content: center;
-            min-height: 100vh;
-        }
-
-        body.modal-open {
-            overflow: hidden; 
-        }
-
-        .container {
-            max-width: 600px;
-            width: 100%;
-            background-color: var(--bg-color);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-        }
-
-        .banner {
-            position: relative;
-            background: radial-gradient(circle at 30% 50%, #1a1a40 0%, #000000 100%);
-            padding: 40px 20px;
-            overflow: hidden;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--divider-color);
-        }
-
-        .banner-bg-icon {
-            position: absolute;
-            opacity: 0.05;
-            stroke: #fff;
-            fill: none;
-            stroke-width: 2;
-            z-index: 0;
-        }
-
-        .bg-glass-1 {
-            top: -20px;
-            left: 10%;
-            width: 80px;
-            height: 80px;
-            transform: rotate(-15deg);
-        }
-
-        .bg-glass-2 {
-            bottom: -30px;
-            right: 20%;
-            width: 120px;
-            height: 120px;
-            transform: rotate(15deg);
-        }
-
-        .banner-content {
-            z-index: 1;
-            max-width: 65%;
-        }
-
-        .banner-title {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 2rem;
-            font-weight: 700;
-            color: white;
-            line-height: 1.1;
-            margin-bottom: 10px;
-        }
-
-        .banner-subtitle {
-            font-size: 0.9rem;
-            color: #E0E0E0;
-            margin-bottom: 15px;
-            font-weight: 300;
-        }
-
-        .telegram-link {
-            display: inline-flex;
-            align-items: center;
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.85rem;
-            background: rgba(0, 136, 204, 0.2);
-            padding: 6px 12px;
-            border-radius: 50px;
-            border: 1px solid rgba(0, 136, 204, 0.5);
-            transition: all 0.3s ease;
-        }
-
-        .telegram-link:hover {
-            background: rgba(0, 136, 204, 0.4);
-            transform: translateY(-2px);
-        }
-
-        .telegram-icon {
-            width: 16px;
-            height: 16px;
-            fill: #0088cc;
-            margin-right: 8px;
-        }
-
-        .banner-graphic {
-            z-index: 1;
-            width: 140px;
-            height: auto;
-            filter: drop-shadow(0 0 15px rgba(100, 100, 255, 0.3));
-        }
-
-        .page-title {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--text-color);
-        }
-
-        .welcome-section { padding: 20px; }
-        .welcome-section h2 { font-size: 1.4rem; font-weight: 500; margin-bottom: 10px; }
-        .welcome-section p { font-size: 0.95rem; color: var(--subtle-text); margin-bottom: 20px; }
-        .search-bar { width: 100%; padding: 12px 15px; border: none; border-radius: 8px; background-color: var(--card-bg); color: var(--text-color); font-size: 1rem; outline: none; }
-        
-        .command-list-header { padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem; color: var(--subtle-text); border-top: 1px solid var(--divider-color); margin-top: 20px; }
-        .command-card {
-            background-color: var(--card-bg); border-radius: 8px;
-            margin: 0 20px 10px 20px; padding: 15px; display: flex;
-            flex-direction: column; gap: 5px; cursor: pointer;
-            transition: background-color 0.2s ease;
-        }
-        .command-card:hover { background-color: #282828; }
-        .command-card-title { font-size: 1.05rem; font-weight: 500; color: var(--text-color); }
-        .command-card-description { font-size: 0.9rem; color: var(--subtle-text); }
-        
-        .details-section {
-            position: fixed; 
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.95);
-            padding: 40px 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            overflow-y: auto;
-            
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-        }
-
-        .details-section.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        .details-content {
-            background-color: var(--card-bg);
-            border-radius: 12px;
-            padding: 20px;
-            max-width: 400px;
-            width: 95%;
-            box-shadow: 0 5px 20px rgba(0, 207, 255, 0.2);
-            position: relative;
-        }
-        
-        .close-button {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            background: none;
-            border: none;
-            color: var(--subtle-text);
-            font-size: 1.8rem;
-            cursor: pointer;
-            line-height: 1;
-            padding: 5px;
-            transition: color 0.2s ease;
-        }
-        .close-button:hover { color: var(--text-color); }
-
-        .details-content h3 { font-size: 1.1rem; font-weight: 700; color: var(--text-color); margin-bottom: 15px; }
-        .details-box { background-color: #121212; padding: 15px; border-radius: 6px; margin-bottom: 20px; border: 1px solid var(--divider-color); }
-        .details-box p { font-size: 0.9rem; color: var(--subtle-text); margin-bottom: 10px; }
-        .details-box code { display: block; background-color: #000000; color: var(--accent-color); padding: 10px; border-radius: 5px; font-family: monospace; overflow-x: auto; }
-        .how-to-use p { font-size: 0.95rem; color: var(--subtle-text); margin-bottom: 20px; }
-        
-        .main-button { 
-            display: block; width: 100%; padding: 15px; border: none; border-radius: 10px;
-            background-color: var(--accent-color); color: var(--button-text-color); 
-            text-align: center; text-decoration: none; font-size: 1rem; font-weight: 700; 
-            cursor: pointer; box-shadow: 0 4px 15px rgba(0, 207, 255, 0.4); 
-            transition: background-color 0.2s, box-shadow 0.2s;
-        }
-        .main-button:hover { background-color: #40dfff; box-shadow: 0 6px 20px rgba(0, 207, 255, 0.6); }
-
-        .footer { padding: 15px; text-align: center; font-size: 0.8rem; color: #555555; border-top: 1px solid var(--divider-color); margin-top: 20px; }
-
-        @media (max-width: 480px) {
-            .banner { padding: 30px 15px; flex-direction: column; text-align: center; }
-            .banner-content { max-width: 100%; margin-bottom: 20px; }
-            .banner-graphic { width: 120px; }
-            .page-title { font-size: 1.5rem; }
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>T7 Buscas — Termos de Uso</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#A855F7', // Violeta vibrante para destaque (combina com o logo)
+            dark: '#110A1A', // Fundo roxo escuro
+            surface: '#251A3B', // Superfície dos cartões
+            border: '#4C3A68', // Borda e divisores
+            text: '#FFFFFF', // Texto principal (branco)
+            textMuted: '#D8B4FE' // Texto secundário (roxo claro)
+          },
+          fontFamily: { 'sans': ['Inter', 'system-ui', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="bg-dark text-text font-sans min-h-screen">
+  <div class="max-w-2xl mx-auto px-4 py-8">
 
-    <div class="container">
+    <!-- Header ajustado para a paleta roxa/magenta -->
+    <div class="bg-surface border border-border rounded-2xl p-5 mb-6 flex items-center gap-4">
+      <img src="https://i.ibb.co/Hf8rtCHL/t7shop.png" alt="Logo T7" class="w-12 h-12 rounded-full border-2 border-primary p-0.5 shadow-lg shadow-primary/20">
+      <div>
+        <h1 class="text-xl font-bold text-primary">T7 Buscas</h1>
+        <p class="text-textMuted text-sm">Termos de Uso</p>
+      </div>
+    </div>
+
+    <!-- Terms Card -->
+    <div class="bg-surface border border-border rounded-2xl p-6 space-y-6">
+ 
+      <p class="text-textMuted text-sm border-b border-border pb-4">Ao utilizar este bot, você concorda automaticamente com os termos abaixo.</p>
+
+      <div class="space-y-6">
+        <div>
+          <h3 class="font-semibold text-primary">1. Finalidade do Serviço</h3>
+          <p class="text-textMuted text-sm">Este bot oferece consultas de dados obtidos de fontes públicas ou autorizadas. As informações retornadas têm caráter informativo e podem variar de acordo com a disponibilidade e atualização das fontes consultadas.</p>
+        </div>
+
+        <div>
+          <h3 class="font-semibold text-primary">2. Responsabilidade do Usuário</h3>
+          <ul class="text-textMuted text-sm list-disc pl-5 space-y-1">
+            <li>O usuário é inteiramente responsável pelo uso das informações obtidas.</li>
+            <li>É proibido utilizar o serviço para qualquer fim ilegal, imoral ou que viole direitos de terceiros.</li>
+            <li>Qualquer uso irregular é de responsabilidade exclusiva do usuário.</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="font-semibold text-primary">3. Pedidos de Estorno Direto no Banco (MED)</h3>
+          <p class="text-textMuted text-sm">Caso o usuário realize <strong>pedido de reembolso diretamente pelo banco (MED)</strong>, ou tente contestar o pagamento alegando cobrança indevida <em>após ter utilizado o serviço</em>, a conta será <strong>desativada permanentemente</strong>. Nesses casos, <strong>não haverá direito a reembolso</strong>, independentemente do motivo apresentado. Esta medida visa proteger o serviço contra tentativas de fraude ou má-fé.</p>
+        </div>
+
+        <div>
+          <h3 class="font-semibold text-primary">4. LGPD – Tratamento de Dados</h3>
+          <p class="text-textMuted text-sm">Este serviço opera em conformidade com a <strong>Lei Geral de Proteção de Dados (Lei nº 13.709/2018)</strong>. Nenhum dado consultado é armazenado de forma permanente ou repassado a terceiros. O bot funciona apenas como intermediador de consultas, não coletando para uso próprio dados pessoais dos usuários ou consultados, exceto quando estritamente necessário e com base legal adequada.</p>
+        </div>
+
+        <div>
+          <h3 class="font-semibold text-primary">5. Política de Reembolso</h3>
+          <p class="text-textMuted text-sm">O reembolso <strong>só será realizado se o usuário não tiver utilizado o serviço nenhuma vez</strong> após o pagamento. Se qualquer consulta tiver sido feita, <strong>o reembolso não será possível</strong>. Solicitações de reembolso devem ser realizadas diretamente com o suporte dentro de 7 dias após o pagamento.</p>
+        </div>
         
-        <div class="banner">
-            <svg class="banner-bg-icon bg-glass-1" viewBox="0 0 24 24">
-                <path d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M21 21L16.65 16.65" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            <svg class="banner-bg-icon bg-glass-2" viewBox="0 0 24 24">
-                <path d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M21 21L16.65 16.65" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-
-            <div class="banner-content">
-                <div class="banner-title">Rock<br>Consultas</div>
-                <div class="banner-subtitle">Soluções em dados</div>
-                <a href="https://t.me/rockconsultasgratisbot" target="_blank" class="telegram-link">
-                    <svg class="telegram-icon" viewBox="0 0 24 24">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.25-5.54 3.69-.52.36-1 .53-1.42.52-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.24.29-.48.79-.74 3.08-1.34 5.15-2.23 6.21-2.66 3.03-1.23 3.66-1.44 4.07-1.44.09 0 .28.02.41.12.11.08.14.19.15.26v.06z"/>
-                    </svg>
-                    t.me/rockconsultas
-                </a>
-            </div>
-
-            <div class="banner-graphic-container">
-                <svg class="banner-graphic" viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <linearGradient id="paperGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" style="stop-color:#7c82ff;stop-opacity:1" />
-                            <stop offset="100%" style="stop-color:#4a50c0;stop-opacity:1" />
-                        </linearGradient>
-                    </defs>
-                    <g transform="translate(20, 20) rotate(-5)">
-                        <rect x="10" y="10" width="140" height="100" rx="2" fill="#333366" stroke="#5555aa" stroke-width="2"/>
-                        <rect x="5" y="5" width="140" height="100" rx="2" fill="#444488" stroke="#6666cc" stroke-width="2"/>
-                        <rect x="0" y="0" width="140" height="100" rx="2" fill="url(#paperGrad)" stroke="#aaccff" stroke-width="1.5"/>
-                        
-                        <rect x="15" y="15" width="40" height="35" fill="rgba(255,255,255,0.2)"/>
-                        <rect x="65" y="15" width="60" height="8" rx="2" fill="rgba(255,255,255,0.3)"/>
-                        <rect x="65" y="28" width="60" height="4" rx="1" fill="rgba(255,255,255,0.2)"/>
-                        <rect x="65" y="36" width="50" height="4" rx="1" fill="rgba(255,255,255,0.2)"/>
-                        
-                        <rect x="15" y="60" width="110" height="4" rx="1" fill="rgba(255,255,255,0.2)"/>
-                        <rect x="15" y="70" width="110" height="4" rx="1" fill="rgba(255,255,255,0.2)"/>
-                        <rect x="15" y="80" width="80" height="4" rx="1" fill="rgba(255,255,255,0.2)"/>
-                    </g>
-                </svg>
-            </div>
-        </div>
-
-        <h1 class="page-title">Comandos</h1>
-
-        <div class="welcome-section">
-            <h2>Bem-vindo!</h2>
-            <p>Aqui você encontra todos os comandos disponíveis para consultas. Use a barra de pesquisa (simulada) para encontrar comandos específicos.</p>
-            <input type="text" class="search-bar" placeholder="Pesquisar comandos...">
-        </div>
-
-        <div class="command-list-header">
-            <span>Comandos Disponíveis</span>
-            <span>11 comandos</span>
-        </div>
-
-        <div class="command-card" data-cmd="/cpf" data-ex="82274320004">
-            <span class="command-card-title">CPF</span>
-            <span class="command-card-description">Consulta pessoas físicas a partir do número do CPF, retornando dados cadastrais, documentos principais e situação cadastral.</span>
-        </div>
-
-        <div class="command-card" data-cmd="/cnpj" data-ex="12345678000100">
-            <span class="command-card-title">CNPJ</span>
-            <span class="command-card-description">Consulta dados cadastrais e financeiros de uma empresa pelo CNPJ.</span>
-        </div>
-
-        <div class="command-card" data-cmd="/foto" data-ex="12345678900">
-            <span class="command-card-title">FOTO</span>
-            <span class="command-card-description">Busca a foto associada a um CPF (disponível em bases específicas).</span>
-        </div>
-
-        <div class="command-card" data-cmd="/cnh" data-ex="12345678900">
-            <span class="command-card-title">CNH</span>
-            <span class="command-card-description">Acesse informações da Carteira Nacional de Habilitação pelo CPF do titular.</span>
-        </div>
-
-        <div class="command-card" data-cmd="/nome" data-ex="Joao da Silva">
-            <span class="command-card-title">NOME</span>
-            <span class="command-card-description">Realiza buscas abrangentes por informações vinculadas a um nome completo.</span>
-        </div>
+        <!-- Novo Item 6: Interrupção e Encerramento do Serviço -->
+        <div>
+          <h3 class="font-semibold text-primary">6. Interrupção e Encerramento do Serviço</h3>
+          <p class="text-textMuted text-sm mb-2">Reservamo-nos o direito de interromper ou encerrar o fornecimento do serviço a qualquer momento, por quaisquer motivos, incluindo, mas não se limitando a:</p>
+          <ul class="text-textMuted text-sm list-disc pl-5 space-y-1">
+            <li>Instabilidade ou quedas técnicas do sistema.</li>
+            <li>Recebimento de bans ou restrições de plataformas.</li>
+            <li>Determinações legais ou ordens judiciais.</li>
+            <li>Violação destes Termos de Uso por parte do usuário.</li>
+          </ul>
+          <p class="text-textMuted text-sm mt-3">Em caso de interrupção ou encerramento, não haverá direito a reembolso por créditos ou tempo de serviço restantes, exceto conforme explicitamente previsto na "Política de Reembolso" para casos de não utilização inicial.</p>
+        </div>
         
-        <div class="command-card" data-cmd="/telefone" data-ex="11987654321">
-            <span class="command-card-title">TELEFONE</span>
-            <span class="command-card-description">Pesquisa dados e titularidade associados a um número de telefone (com DDD).</span>
-        </div>
-        
-        <div class="command-card" data-cmd="/email" data-ex="exemplo@dominio.com">
-            <span class="command-card-title">EMAIL</span>
-            <span class="command-card-description">Consulte informações e possíveis vazamentos de dados de um endereço de e-mail.</span>
-        </div>
-        
-        <div class="command-card" data-cmd="/placa" data-ex="ABC1234">
-            <span class="command-card-title">PLACA</span>
-            <span class="command-card-description">Verifique dados completos de um veículo (Mercosul ou padrão antigo).</span>
-        </div>
+        <!-- Item 7 (Antigo 6) Renumerado -->
+        <div>
+          <h3 class="font-semibold text-primary">7. Aceitação dos Termos</h3>
+          <p class="text-textMuted text-sm">Ao utilizar o bot, o usuário confirma que leu e concorda com todos os termos acima. Caso não concorde, deve interromper imediatamente o uso do serviço.</p>
+        </div>
+      </div>
 
-        <div class="command-card" data-cmd="/ip" data-ex="8.8.8.8">
-            <span class="command-card-title">IP</span>
-            <span class="command-card-description">Obtenha detalhes de geolocalização e provedor de um endereço IP.</span>
-        </div>
+      <!-- Footer actions -->
+      <div class="pt-4 border-t border-border mt-6">
+       
+        <p class="text-textMuted text-xs mt-3">Contato de suporte: <strong>@Rock</strong></p>
+      </div>
+    </div>
 
-        <div class="command-card" data-cmd="/cep" data-ex="01001000">
-            <span class="command-card-title">CEP</span>
-            <span class="command-card-description">Consulte o endereço completo e, se disponível, informações sobre moradores de um CEP.</span>
-        </div>
+    <p class="text-textMuted text-xs text-center mt-6">© <span id="year"></span> T7 Buscas — Todos os direitos reservados.</p>
+  </div>
 
-        <div class="command-card" data-cmd="/resgatar" data-ex="MINHACHAVE12345">
-            <span class="command-card-title">RESGATAR</span>
-            <span class="command-card-description">Ative ou estenda sua assinatura utilizando uma chave de ativação.</span>
-        </div>
-        
-        <footer class="footer">
-            <p>@rockconsultasgratisbot. Todos os direitos reservados.</p>
-        </footer>
-
-    </div>
-
-    <div class="details-section" id="command-details">
-        <div class="details-content">
-            <button id="close-details" class="close-button" aria-label="Fechar">&times;</button>
-            
-            <h3>Detalhes do comando <span id="detail-title"></span></h3>
-            
-            <div class="details-box">
-                <p id="detail-description"></p>
-                <code id="detail-example"></code>
-            </div>
-
-            <div class="how-to-use">
-                <p>Copie o comando acima e cole-o diretamente no chat do Telegram com o bot. O bot processará sua solicitação e retornará os resultados da consulta.</p>
-                <a href="https://t.me/rockconsultasgratisbot" class="main-button" target="_blank">Abrir bot no Telegram</a>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const commandCards = document.querySelectorAll('.command-card');
-            const detailsSection = document.getElementById('command-details');
-            const closeButton = document.getElementById('close-details');
-            
-            const detailTitle = document.getElementById('detail-title');
-            const detailDescription = document.getElementById('detail-description');
-            const detailExample = document.getElementById('detail-example');
-
-            const updateDetails = (card) => {
-                const titleText = card.querySelector('.command-card-title').textContent;
-                const descriptionText = card.querySelector('.command-card-description').textContent;
-                const command = card.dataset.cmd;
-                const example = card.dataset.ex;
-
-                detailTitle.textContent = titleText;
-                detailDescription.textContent = descriptionText;
-                detailExample.textContent = `${command} ${example}`;
-
-                detailsSection.classList.add('active');
-                document.body.classList.add('modal-open'); 
-            };
-
-            const closeDetails = () => {
-                detailsSection.classList.remove('active');
-                document.body.classList.remove('modal-open');
-            };
-
-            commandCards.forEach(card => {
-                card.addEventListener('click', () => {
-                    updateDetails(card);
-                });
-            });
-
-            closeButton.addEventListener('click', closeDetails);
-
-            detailsSection.addEventListener('click', (e) => {
-                if (e.target.id === 'command-details') {
-                    closeDetails();
-                }
-            });
-
-            const firstCard = commandCards[0];
-            if (firstCard) {
-                detailTitle.textContent = firstCard.querySelector('.command-card-title').textContent;
-                detailDescription.textContent = firstCard.querySelector('.command-card-description').textContent;
-                detailExample.textContent = `${firstCard.dataset.cmd} ${firstCard.dataset.ex}`;
-            }
-        });
-    </script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
